@@ -1,0 +1,124 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const Otp = () => {
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  const [sent, setSent] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [error, setError] = useState("");
+
+  const validatePhone = () => {
+    const isValid = /^[0-9]{10}$/.test(phone);
+    if (!isValid) {
+      setError("Please enter a valid 10-digit mobile number.");
+      return false;
+    }
+    return true;
+  };
+
+  const sendOTP = async () => {
+    setError("");
+    if (!validatePhone()) return;
+
+    try {
+      const response = await axios.post("http://localhost:5000/send-otp", {
+        phone: "+91" + phone, // Ensure proper E.164 format for Twilio
+      });
+      setSent(true);
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to send OTP");
+    }
+  };
+
+  const verifyOTP = async () => {
+    setError("");
+    try {
+      const response = await axios.post("http://localhost:5000/verify-otp", {
+        phone: "+91" + phone,
+        otp,
+      });
+      setVerified(true);
+    } catch (err) {
+      setError(err.response?.data?.message || "Invalid OTP");
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "");
+    if (value.length <= 10) setPhone(value);
+  };
+
+  return (
+    <div className="bg-[#000000] min-h-screen flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-[#111111] p-8 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold text-white text-center mb-4">
+          {verified ? "✅ Verified!" : "OTP Verification"}
+        </h2>
+        <p className="text-[#00B3A3] font-medium text-center mb-6">
+          For Business Verification
+        </p>
+
+        {!verified ? (
+          <>
+            <label className="block text-[#C1C1C1] mb-2 text-sm">
+              Mobile Number
+            </label>
+            <input
+              type="text"
+              maxLength="10"
+              className="w-full mb-4 px-4 py-3 rounded-md border border-[#222] bg-[#191919] text-white focus:outline-none focus:ring-2 focus:ring-[#00B3A3]"
+              placeholder="Enter 10-digit number"
+              value={phone}
+              onChange={handlePhoneChange}
+            />
+
+            {sent && (
+              <>
+                <label className="block text-[#C1C1C1] mb-2 text-sm">
+                  Enter OTP
+                </label>
+                <input
+                  type="text"
+                  className="w-full mb-4 px-4 py-3 rounded-md border border-[#222] bg-[#191919] text-white focus:outline-none focus:ring-2 focus:ring-[#00B3A3]"
+                  placeholder="123456"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+              </>
+            )}
+
+            {error && (
+              <p className="text-red-500 text-sm text-center mb-3">{error}</p>
+            )}
+
+            {!sent ? (
+              <button
+                onClick={sendOTP}
+                className="w-full bg-[#005243] hover:bg-[#007C60] text-white py-3 rounded-md font-semibold transition-colors duration-300"
+              >
+                Send OTP
+              </button>
+            ) : (
+              <button
+                onClick={verifyOTP}
+                className="w-full bg-[#005243] hover:bg-[#007C60] text-white py-3 rounded-md font-semibold transition-colors duration-300"
+              >
+                Verify OTP
+              </button>
+            )}
+          </>
+        ) : (
+          <div className="text-center text-white mt-6">
+            <p className="text-lg mb-2">Your number has been verified.</p>
+            <p className="text-[#C1C1C1] text-sm">
+              You can now access the platform.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Otp;
