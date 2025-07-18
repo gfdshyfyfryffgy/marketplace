@@ -42,26 +42,25 @@ function App() {
     <>
     
       <Navbar />
-      <Routes>
-        <Route path="/" element={<AllSection/>} />
-        {/* Correct the path to '/steel' */}
-        <Route path="steel" element={<Steel/>} />
-        <Route path="polymers" element={<Polymers/>}/>
-        <Route path="bitumen" element={<Bitumen/>}/>
-        <Route path="non-ferrous" element={<NonFerrous/>}/>
-        <Route path="pipes" element={<Pipes/>}/>
-        <Route path="chemicals" element={<Chemicals/>}/>
-        <Route path="agri-commodities" element={<BricksBlocks/>}/>
-        <Route path="bricks-blocks" element={<AgriCommodities/>}/>
-        <Route path="categories" element={<Product/>}/>
-        <Route path="contact" element={<Contact/>}/>
-        <Route path="about" element={<About/>}/>
-        <Route path="services" element={<Service/>}/>
-        <Route path="solutions" element={<SolutionsFullSection/>}/>
-        <Route path="login" element={<Otp/>}/>
-        <Route path="admin" element={<Admin/>}/>
-      </Routes>
-      <Footer/>
+       <Routes>
+         <Route path="/" element={<AllSection />} />
+         <Route path="/steel" element={<Steel />} />
+         <Route path="/polymers" element={<Polymers />} />
+         <Route path="/bitumen" element={<Bitumen />} />
+         <Route path="/non-ferrous" element={<NonFerrous />} />
+         <Route path="/pipes" element={<Pipes />} />
+         <Route path="/chemicals" element={<Chemicals />} />
+         <Route path="/agri-commodities" element={<AgriCommodities />} />
+         <Route path="/bricks-blocks" element={<BricksBlocks />} />
+         <Route path="/categories" element={<Product />} />
+         <Route path="/contact" element={<Contact />} />
+         <Route path="/about" element={<About />} />
+         <Route path="/services" element={<Service />} />
+         <Route path="/solutions" element={<SolutionsFullSection />} />
+         <Route path="/login" element={<Otp />} />
+         <Route path="/admin" element={<Admin />} />
+       </Routes>
+       <Footer />
     </>
   );
 }

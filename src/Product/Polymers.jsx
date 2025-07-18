@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
-// FAQ Data
+// FAQ Data for Mild Steel
 const faqData = [
   {
     question: "What is Mild Steel?",
@@ -10,14 +10,16 @@ const faqData = [
   },
   {
     question: "What are the common applications of Mild Steel?",
-    answer: "It is used in construction, automotive, and manufacturing industries.",
+    answer:
+      "It is used in construction, automotive, and manufacturing industries.",
   },
   {
     question: "Where can I find the latest prices for Mild Steel products?",
     answer: "Check our website for updated prices.",
   },
   {
-    question: "How often are the Mild Steel product prices updated on our platform?",
+    question:
+      "How often are the Mild Steel product prices updated on our platform?",
     answer: "Prices are updated every hour.",
   },
   {
@@ -25,23 +27,67 @@ const faqData = [
     answer: "Yes, there are various grades of Mild Steel.",
   },
   {
-    question: "Can I get customized quotes for specific Mild Steel product variations or quantities?",
+    question:
+      "Can I get customized quotes for specific Mild Steel product variations or quantities?",
     answer: "Yes, contact us for a custom quote.",
   },
   {
-    question: "What are the factors to consider when purchasing Mild Steel products?",
+    question:
+      "What are the factors to consider when purchasing Mild Steel products?",
     answer: "Consider strength, price, and material specifications.",
   },
 ];
 
-// Price List Data
+// Price List Data for Mild Steel
 const priceData = [
-  { product: "HRC E350 BR", location: "EX - Faridabad", price: "₹55,000/MT", time: "2 hours ago", actions: ["Buy", ], href: "/products/hrc-e350-br-faridabad" },
-  { product: "HRC E350 BR", location: "EX - Ludhiana", price: "₹56,000/MT", time: "2 hours ago", actions: ["Buy",], href: "/products/hrc-e350-br-ludhiana" },
-  { product: "HRC E250 BR", location: "EX - Ludhiana", price: "Login to View", time: "", actions: ["Login to View"], href: "/products/hrc-e250-br-ludhiana" },
-  { product: "HRC E250 BR", location: "EX - Mumbai", price: "Login to View", time: "", actions: ["Login to View"], href: "/products/hrc-e250-br-mumbai" },
-  { product: "HRC E350 BR", location: "EX - Bangalore", price: "Login to View", time: "", actions: ["Login to View"], href: "/products/hrc-e350-br-bangalore" },
-  { product: "HRC E350 BR", location: "EX - Chennai", price: "Login to View", time: "", actions: ["Login to View"], href: "/products/hrc-e350-br-chennai" },
+  {
+    product: "HRC E350 BR",
+    location: "EX - Faridabad",
+    price: "₹55,000/MT",
+    time: "2 hours ago",
+    actions: ["Buy", "Sell"],
+    href: "#login",
+  },
+  {
+    product: "HRC E350 BR",
+    location: "EX - Ludhiana",
+    price: "₹56,000/MT",
+    time: "2 hours ago",
+    actions: ["Buy", "Sell"],
+    href: "/login",
+  },
+  {
+    product: "HRC E250 BR",
+    location: "EX - Ludhiana",
+    price: "Login to View",
+    time: "",
+    actions: ["Login to View"],
+    href: "/login",
+  },
+  {
+    product: "HRC E250 BR",
+    location: "EX - Mumbai",
+    price: "Login to View",
+    time: "",
+    actions: ["Login to View"],
+    href: "/login",
+  },
+  {
+    product: "HRC E350 BR",
+    location: "EX - Bangalore",
+    price: "Login to View",
+    time: "",
+    actions: ["Login to View"],
+    href: "/login",
+  },
+  {
+    product: "HRC E350 BR",
+    location: "EX - Chennai",
+    price: "Login to View",
+    time: "",
+    actions: ["Login to View"],
+    href: "/login",
+  },
 ];
 
 // FAQ Component
@@ -50,19 +96,21 @@ const FAQ = () => {
   const faqRefs = useRef([]);
 
   useEffect(() => {
-    if (faqRefs.current.length) {
-      gsap.fromTo(
-        faqRefs.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.13,
-          ease: "power3.out"
-        }
-      );
-    }
+    faqRefs.current.forEach((el, i) => {
+      if (el) {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            delay: i * 0.13,
+          }
+        );
+      }
+    });
   }, []);
 
   const toggleFAQ = (index) => {
@@ -71,18 +119,30 @@ const FAQ = () => {
 
   return (
     <section className="bg-[#111] py-12 px-6 md:px-12 rounded-xl shadow-lg mb-12">
-      <h3 className="text-3xl font-bold text-center text-white mb-8">Mild Steel FAQs</h3>
+      <h3 className="text-3xl font-bold text-center text-white mb-8">
+        Mild Steel FAQs
+      </h3>
       <div className="max-w-4xl mx-auto">
         {faqData.map((faq, index) => (
-          <div key={index} className="mb-4" ref={el => faqRefs.current[index] = el}>
+          <div
+            key={index}
+            className="mb-4"
+            ref={(el) => (faqRefs.current[index] = el)}
+          >
             <button
-              className={`w-full flex justify-between items-center bg-[#222] text-white p-4 rounded-lg focus:outline-none transition-shadow ${activeIndex === index ? "shadow-lg" : "shadow"}`}
+              className={`w-full flex justify-between items-center bg-[#222] text-white p-4 rounded-lg focus:outline-none transition-shadow ${
+                activeIndex === index ? "shadow-lg" : "shadow"
+              }`}
               onClick={() => toggleFAQ(index)}
               aria-expanded={activeIndex === index}
               aria-controls={`faq-answer-${index}`}
             >
-              <span className="text-left text-base md:text-lg">{faq.question}</span>
-              <span className="ml-4 text-xl">{activeIndex === index ? "−" : "+"}</span>
+              <span className="text-left text-base md:text-lg">
+                {faq.question}
+              </span>
+              <span className="ml-4 text-xl">
+                {activeIndex === index ? "−" : "+"}
+              </span>
             </button>
             {activeIndex === index && (
               <div
@@ -99,73 +159,129 @@ const FAQ = () => {
   );
 };
 
-// Requirement Form Component
- // Requirement Form Component
+// Requirement Form Component with Buy/Sell Switch and GST field
 const RequirementForm = () => {
   const formRef = useRef(null);
 
+  const [mode, setMode] = useState("Buy");
   const [formData, setFormData] = useState({
     product: "",
     quantity: "",
     company: "",
     pincode: "",
+    gst: "",
     email: "",
     mobile: "",
     countryCode: "+91",
   });
 
+  useEffect(() => {
+    if (formRef.current) {
+      gsap.fromTo(
+        Array.from(formRef.current.children),
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: "power3.out" }
+      );
+    }
+  }, []);
+
+  const validateForm = () => {
+    if (!formData.product) return "Please select a product.";
+    if (!formData.quantity || formData.quantity <= 0)
+      return "Enter valid quantity.";
+    if (!formData.company.trim()) return "Company name is required.";
+
+    if (
+      mode === "Buy" &&
+      (!formData.pincode || !/^\d{6}$/.test(formData.pincode))
+    ) {
+      return "Enter a valid 6-digit Pincode.";
+    }
+
+    if (
+      mode === "Sell" &&
+      (!formData.gst ||
+        !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(
+          formData.gst
+        ))
+    ) {
+      return "Enter a valid GST number.";
+    }
+
+    if (!formData.email || !/^\S+@\S+\.\S+$/.test(formData.email)) {
+      return "Enter a valid email.";
+    }
+
+    if (!formData.mobile || !/^\d{10}$/.test(formData.mobile)) {
+      return "Enter a valid 10-digit mobile number.";
+    }
+
+    return null; // valid
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const error = validateForm();
+    if (error) {
+      alert("❌ " + error);
+      return;
+    }
+
     const payload = {
+      mode,
       ...formData,
       mobile: formData.countryCode + formData.mobile,
     };
 
-try {
-  const response = await fetch(
-    "https://script.google.com/macros/s/AKfycbwLXuKxLzqn4l-SfZoTAT47TSSFujIKTUPwJOVBxinUp5ltPRBi0C0lcjakcZ8J1Rs3oQ/exec",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
+    const url =
+      "https://script.google.com/macros/s/AKfycbyOm9xsM23ZRjE6FwxS5iGdAkbbuYrS_eRlT6jTGMwt8pXr0ir53NCUIOi1iV8-s9gB0g/exec";
 
-
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const result = await response.json();
 
       if (result.status === "success") {
         alert("✅ Requirement submitted successfully!");
-        formRef.current.reset(); // clears the form
         setFormData({
           product: "",
           quantity: "",
           company: "",
           pincode: "",
+          gst: "",
           email: "",
           mobile: "",
           countryCode: "+91",
         });
       } else {
-        alert("❌ Submission failed, please try again.");
+        alert("❌ Submission failed.");
       }
     } catch (error) {
-      alert("🚫 Something went wrong!");
+      alert("🚫 Submission error.");
       console.error(error);
     }
   };
 
   return (
-    <section className="bg-[#111] py-10 px-6 rounded-xl shadow-lg mb-12">
+    <section
+      id="login"
+      className="login bg-[#111] py-10 px-6 rounded-xl shadow-lg mb-12"
+    >
       <div className="max-w-2xl mx-auto text-white">
         <h2 className="text-3xl font-bold text-center mb-3">
           Tell Us Your Requirement
@@ -175,8 +291,42 @@ try {
         </p>
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-7">
           <div className="grid grid-cols-1 gap-6">
+            {/* Buy/Sell Switch */}
             <div>
-              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">Product</label>
+              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                Requirement Type
+              </label>
+              <div className="flex space-x-4">
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="mode"
+                    value="Buy"
+                    checked={mode === "Buy"}
+                    onChange={() => setMode("Buy")}
+                    className="form-radio text-[#00B3A3]"
+                  />
+                  <span className="ml-2">Buy</span>
+                </label>
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="mode"
+                    value="Sell"
+                    checked={mode === "Sell"}
+                    onChange={() => setMode("Sell")}
+                    className="form-radio text-[#00B3A3]"
+                  />
+                  <span className="ml-2">Sell</span>
+                </label>
+              </div>
+            </div>
+
+            {/* Common Fields */}
+            <div>
+              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                Product
+              </label>
               <select
                 name="product"
                 value={formData.product}
@@ -190,8 +340,11 @@ try {
                 <option value="Bitumen">Bitumen</option>
               </select>
             </div>
+
             <div>
-              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">Quantity</label>
+              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                Quantity
+              </label>
               <input
                 type="number"
                 name="quantity"
@@ -203,8 +356,11 @@ try {
                 required
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">Company</label>
+              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                Company
+              </label>
               <input
                 type="text"
                 name="company"
@@ -215,20 +371,44 @@ try {
                 required
               />
             </div>
+
+            {/* Conditional Field: Pincode or GST */}
+            {mode === "Buy" ? (
+              <div>
+                <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                  Pincode
+                </label>
+                <input
+                  type="text"
+                  name="pincode"
+                  value={formData.pincode}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-[#222] bg-[#191919] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#00B3A3]"
+                  placeholder="Enter Pincode"
+                  required
+                />
+              </div>
+            ) : (
+              <div>
+                <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                  GST Number
+                </label>
+                <input
+                  type="text"
+                  name="gst"
+                  value={formData.gst}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-[#222] bg-[#191919] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#00B3A3]"
+                  placeholder="Enter GST Number"
+                  required
+                />
+              </div>
+            )}
+
             <div>
-              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">Pincode</label>
-              <input
-                type="text"
-                name="pincode"
-                value={formData.pincode}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-[#222] bg-[#191919] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#00B3A3]"
-                placeholder="Enter Pincode"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">Email</label>
+              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
@@ -239,8 +419,11 @@ try {
                 required
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">Mobile Number</label>
+              <label className="block text-sm font-medium mb-2 text-[#C1C1C1]">
+                Mobile Number
+              </label>
               <div className="flex">
                 <select
                   name="countryCode"
@@ -264,6 +447,7 @@ try {
               </div>
             </div>
           </div>
+
           <div className="text-center">
             <button
               type="submit"
@@ -277,73 +461,94 @@ try {
     </section>
   );
 };
+
 // Price List Component
 const PriceList = () => {
   const listRef = useRef([]);
 
   useEffect(() => {
-    if (listRef.current.length) {
-      gsap.fromTo(
-        listRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.13,
-          ease: "power3.out"
-        }
-      );
-    }
+    listRef.current.forEach((el, i) => {
+      if (el) {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            delay: i * 0.13,
+          }
+        );
+      }
+    });
   }, []);
 
   return (
     <section className="bg-[#111] py-10 px-6 rounded-xl shadow-lg mb-12">
       <div className="max-w-2xl mx-auto w-full">
         <h2 className="text-2xl font-bold text-white mb-8">
-          Mild Steel Most Viewed Prices
+          Polymers Most Viewed Prices
         </h2>
         <div className="overflow-x-auto">
           <table className="w-full table-auto bg-[#191919] rounded-lg shadow">
             <thead>
               <tr>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">Product</th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">Location</th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">Price</th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">Actions</th>
+                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+                  Product
+                </th>
+                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+                  Location
+                </th>
+                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+                  Price
+                </th>
+                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {priceData.map((item, index) => (
                 <tr
                   key={index}
-                  ref={el => listRef.current[index] = el}
+                  ref={(el) => (listRef.current[index] = el)}
                   className="border-t border-b border-[#222] hover:bg-[#171717] transition-colors duration-300 cursor-pointer"
-                  onClick={() => window.location.href = item.href}
+                  onClick={() => (window.location.href = item.href)}
                   tabIndex={0}
                   style={{ outline: "none" }}
-                  onKeyPress={e => { if (e.key === "Enter") window.location.href = item.href; }}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") window.location.href = item.href;
+                  }}
                   title="View Product Details"
                 >
-                  <td className="py-4 px-4 text-sm text-white">{item.product}</td>
-                  <td className="py-4 px-4 text-sm text-white">{item.location}</td>
+                  <td className="py-4 px-4 text-sm text-white">
+                    {item.product}
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white">
+                    {item.location}
+                  </td>
                   <td className="py-4 px-4 text-sm text-white">{item.price}</td>
                   <td className="py-4 px-4 text-sm text-white">
-                    {item.actions.map((action, idx) => (
-                      <button
-                        key={idx}
-                        className={`mr-2 px-4 py-2 rounded-md font-semibold transition-colors duration-300 text-xs ${
-                          action === "Buy"
+                    <div className="flex flex-wrap gap-2">
+                      {item.actions.map((action, i) => (
+                        <a
+                          key={i}
+                          href={item.href}
+                          className={`px-4 py-1.5 text-sm rounded-md font-medium text-center 
+          ${
+             action === "Buy"
                             ? "bg-[#005243] text-white hover:bg-[#007C60]"
-                            : action === "Whatsapp"
-                            ? "bg-[#00B3A3] text-white hover:bg-[#00d1c1]"
+                            : action === "Sell"
+                            ? "bg-[#d41818] text-white hover:bg-[#ff4d4d]"
                             : "bg-[#444] text-white hover:bg-[#666]"
-                        }`}
-                        onClick={e => { e.stopPropagation(); window.location.href = item.href; }}
-                      >
-                        {action}
-                      </button>
-                    ))}
+          }`}
+                          style={{ minWidth: "50px" }}
+                        >
+                          {action}
+                        </a>
+                      ))}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -354,7 +559,7 @@ const PriceList = () => {
         <div className="text-center">
           <button
             className="mt-8 bg-[#005243] text-white px-8 py-3 rounded-md hover:bg-[#007C60] font-semibold shadow-lg transition-colors duration-300"
-            onClick={() => window.location.href = "/prices"}
+            onClick={() => (window.location.href = "/prices")}
           >
             View All Prices
           </button>
@@ -365,7 +570,7 @@ const PriceList = () => {
 };
 
 // Main Combined Section
-const Polymers  = () => {
+const Steel = () => {
   const heroRef = useRef();
   const subRef = useRef();
 
@@ -390,13 +595,14 @@ const Polymers  = () => {
           ref={heroRef}
           className="text-4xl md:text-5xl font-extrabold text-white mb-4 text-center"
         >
-          Mild Steel Products, Prices & FAQs
+          Polymers Products, Prices & FAQs
         </h1>
         <p
           ref={subRef}
           className="mb-10 text-center text-[#C1C1C1] text-lg max-w-2xl mx-auto"
         >
-          Explore the latest prices, get your requirements fulfilled, and find answers to all your Mild Steel questions!
+          Explore the latest prices, get your requirements fulfilled, and find
+          answers to all your Polymers questions!
         </p>
 
         {/* Main Content: Prices left, Form right (desktop) */}
@@ -424,5 +630,4 @@ const Polymers  = () => {
   );
 };
 
-export default Polymers ;
-
+export default Steel;

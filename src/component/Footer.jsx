@@ -21,8 +21,8 @@ const footerLinks = [
     links: ["Privacy Policy", "Terms of Service"],
   },
   {
-    title: "Connect",
-    links: ["87656861", "jhkdhfdhkfkf", "jfhufdhkfdfkdh"],
+    title: "Contact",
+    links: ["+91 96535 44472", "sochinnovative19@gmail", "Model Town, Panipat, Haryana"],
   },
 ];
 
@@ -40,7 +40,7 @@ const Footer = () => {
           className="flex justify-center items-center col-span-2 lg:col-span-1"
         >
           <CircularText
-            text=" sagar " // change the text form her 
+            text="MarketPlace " // change the text form her 
             spinDuration={20}
             onHover="speedUp"
             className="text-green-400"
