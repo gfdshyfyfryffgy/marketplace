@@ -86,7 +86,7 @@ const Product = () => {
           className="w-full h-full"
         >
           {categories.map((item, i) => (
-            <SwiperSlide key={i} className="relative w-full h-full ">
+            <SwiperSlide key={i} className="relative w-full h-full overflow-hidden">
               <div className="w-full h-full">
                 <img
                   src={item.image}
