@@ -22,7 +22,7 @@ const footerLinks = [
   },
   {
     title: "Contact",
-    links: ["8307967782", "sochinnovative19@gmail", "Model Town, Panipat, Haryana"],
+    links: ["+91 96535 44472", "sochinnovative19@gmail", "Model Town, Panipat, Haryana"],
   },
 ];
 
