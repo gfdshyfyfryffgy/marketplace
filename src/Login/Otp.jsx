@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Otp = () => {
@@ -7,6 +9,15 @@ const Otp = () => {
   const [sent, setSent] = useState(false);
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState("");
+
+  // Check token on mount
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setVerified(true);
+    }
+  }, []);
+const navigate = useNavigate();
 
   const validatePhone = () => {
     const isValid = /^[0-9]{10}$/.test(phone);
@@ -22,31 +33,55 @@ const Otp = () => {
     if (!validatePhone()) return;
 
     try {
-      const response = await axios.post("http://localhost:5000/send-otp", {
-        phone: "+91" + phone, // Ensure proper E.164 format for Twilio
-      });
+      // ⬇️ inside sendOTP
+const response = await axios.post("https://backend-39h3.onrender.com/send-otp", {
+  phone: "+91" + phone,
+});
+
       setSent(true);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to send OTP");
     }
   };
 
-  const verifyOTP = async () => {
-    setError("");
-    try {
-      const response = await axios.post("http://localhost:5000/verify-otp", {
-        phone: "+91" + phone,
-        otp,
-      });
-      setVerified(true);
-    } catch (err) {
-      setError(err.response?.data?.message || "Invalid OTP");
-    }
-  };
+const verifyOTP = async () => {
+  setError("");
+  try {
+    const response = await axios.post("https://backend-39h3.onrender.com/verify-otp", {
+      phone: "+91" + phone,
+      otp,
+    });
+
+    // ✅ Save token and phone
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("phone", "+91" + phone); // ✅ Add this line
+
+    setVerified(true);
+
+    // ✅ Redirect to profile page after successful login
+// ✅ Redirect to profile and reload
+navigate("/profile");
+setTimeout(() => {
+  window.location.reload();
+}, 500); // 0.5 second delay to allow redirect before reload
+
+  } catch (err) {
+    setError(err.response?.data?.message || "Invalid OTP");
+  }
+};
+
 
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
     if (value.length <= 10) setPhone(value);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setVerified(false);
+    setPhone("");
+    setOtp("");
+    setSent(false);
   };
 
   return (
@@ -114,6 +149,12 @@ const Otp = () => {
             <p className="text-[#C1C1C1] text-sm">
               You can now access the platform.
             </p>
+            <button
+              onClick={handleLogout}
+              className="mt-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
+            >
+              Logout
+            </button>
           </div>
         )}
       </div>

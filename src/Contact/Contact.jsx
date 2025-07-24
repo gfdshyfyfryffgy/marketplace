@@ -44,7 +44,7 @@ const Contact = () => {
             <div>
               <h4 className="text-[#00B3A3] font-semibold text-xl">For Business Inquiries</h4>
               <p className="text-[#C1C1C1]">Email: contact@yourcompany.com</p>
-              <p className="text-[#C1C1C1]">Phone: +91 98765 43210</p>
+              <p className="text-[#C1C1C1]">Phone: +91 96535 44472</p>
             </div>
 
             <div>

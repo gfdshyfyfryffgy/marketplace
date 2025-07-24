@@ -1,10 +1,8 @@
-import Spline from "@splinetool/react-spline";
 import React from "react";
-// import asos from "asos";
+import { Link } from "react-router-dom";
+import Spline from "@splinetool/react-spline";
 
 export default function Home() {
- 
-
   return (
     <main className="relative w-full min-h-screen bg-black overflow-hidden flex items-center">
       {/* Left Side: Text Content */}
@@ -21,28 +19,27 @@ export default function Home() {
             Connect with 1500+ Verified Suppliers. Enjoy Flexible Financing
             &amp; Smart Logistics
           </p>
-          <a
-            href="#"
-            className="demo inline-block bg-[#005243] text-white px-8 py-3 rounded-lg font-semibold shadow-lg text-base hover:bg-[#008b7b] transition pointer-events-auto" 
-          >
-            JOIN US NOW
-          </a>
+          <Link to="/contact">
+            <button className="demo inline-block bg-[#005243] text-white px-8 py-3 rounded-lg font-semibold shadow-lg text-base hover:bg-[#008b7b] transition pointer-events-auto">
+              JOIN US NOW
+            </button>
+          </Link>
         </div>
       </div>
+
       {/* Right Side: Spline Animation */}
       <div className="relative w-full h-[400px] rounded-xl overflow-hidden">
-        <spline-viewer
-          url="https://prod.spline.design/NNSKaYWPNEw7M6yR/scene.splinecode"
+        <Spline
+          scene="https://prod.spline.design/NNSKaYWPNEw7M6yR/scene.splinecode"
           style={{
             width: "100%",
             height: "100%",
             borderRadius: "0.75rem",
             marginLeft: "280px",
           }}
-        ></spline-viewer>
-
+        />
         {/* Overlay to hide logo */}
-        <div className="absolute bottom-5 right-2 w-39 h-12 bg-[black] z-10 rounded-md mr-2 mt-3"></div>
+        <div className="absolute bottom-5 right-2 w-39 h-12 bg-black z-10 rounded-md mr-2 mt-3"></div>
       </div>
     </main>
   );
