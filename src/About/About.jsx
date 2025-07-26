@@ -6,6 +6,10 @@ import { useInView } from "react-intersection-observer";
 import Steel from "../assets/steel.png";
 import Chemicals from "../assets/Chamical.png";
 import Bitumen from "../assets/bitumen.png";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 
 const statsData = [
   { value: 205, suffix: "%", label: "CAGR FY22 - FY24" },

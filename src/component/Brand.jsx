@@ -4,17 +4,19 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios";
 
 // Import your images (or use dynamic data from axios)
-import nike from "../assets/nike.png";
-import jj from "../assets/jj.png";
-import hh from "../assets/hh.png";
-import uu from "../assets/uu.png";
-import mc from "../assets/mc.png";
-import it from "../assets/it.png";
-import gg from "../assets/gg.png";
+import nike from "../assets/jjs.png";
+import jj from "../assets/logo12.jpg";
+import hh from "../assets/zz.webp";
+import uu from "../assets/logo.svg";
+import mc from "../assets/TEA-logo.jpg";
+import it from "../assets/sstent-1.png";
+import gg from "../assets/ss.avif";
+import tt from "../assets/zz.webp";
+import gp from "../assets/gp.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const defaultImages = [nike, jj, hh, uu, mc, it, gg];
+const defaultImages = [nike, jj, hh, uu, mc, it, gg,tt,gp];
 
 export default function Brand() {
   const containerRef = useRef();
