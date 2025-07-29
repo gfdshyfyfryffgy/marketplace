@@ -10,9 +10,16 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   // Check login state on mount
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+ useEffect(() => {
+    const checkLogin = () => {
+      const token = localStorage.getItem("token");
+      setIsLoggedIn(!!token);
+    };
+
+    checkLogin();
+
+    window.addEventListener("storage", checkLogin);
+    return () => window.removeEventListener("storage", checkLogin);
   }, []);
 
   const handleLogout = () => {

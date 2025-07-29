@@ -24,7 +24,7 @@ import Service from "../src/Service/Service"
 import SolutionsFullSection from "../src/Solution/SolutionsFullSection"
 import Otp from "./Login/Otp";
 import Admin from "./Product/Admin";
-import Form from "./Form";
+
 import MyProfile from "./Login/MyProfile";
 
 
@@ -61,7 +61,6 @@ function App() {
          <Route path="/solutions" element={<SolutionsFullSection />} />
          <Route path="/login" element={<Otp />} />
          <Route path="/admin" element={<Admin />} />
-         <Route path="/form" element={<Form/>}/>
          <Route path="/profile" element={<MyProfile />} />
 
        </Routes>

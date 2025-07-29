@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios";
 
 const Otp = () => {
@@ -9,15 +8,22 @@ const Otp = () => {
   const [sent, setSent] = useState(false);
   const [verified, setVerified] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [timer, setTimer] = useState(0);
 
-  // Check token on mount
+  const navigate = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      setVerified(true);
-    }
+    if (token) setVerified(true);
   }, []);
-const navigate = useNavigate();
+
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      return () => clearInterval(interval);
+    }
+  }, [timer]);
 
   const validatePhone = () => {
     const isValid = /^[0-9]{10}$/.test(phone);
@@ -32,44 +38,40 @@ const navigate = useNavigate();
     setError("");
     if (!validatePhone()) return;
 
+    setLoading(true);
+    setTimer(20); // ⏳ start 20 sec countdown
+
     try {
-      // ⬇️ inside sendOTP
-const response = await axios.post("https://backend-39h3.onrender.com/send-otp", {
-  phone: "+91" + phone,
-});
+      const response = await axios.post("https://backend-39h3.onrender.com/send-otp", {
+        phone: "+91" + phone,
+      });
 
       setSent(true);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to send OTP");
+    } finally {
+      setLoading(false);
     }
   };
 
-const verifyOTP = async () => {
-  setError("");
-  try {
-    const response = await axios.post("https://backend-39h3.onrender.com/verify-otp", {
-      phone: "+91" + phone,
-      otp,
-    });
+  const verifyOTP = async () => {
+    setError("");
+    try {
+      const response = await axios.post("https://backend-39h3.onrender.com/verify-otp", {
+        phone: "+91" + phone,
+        otp,
+      });
 
-    // ✅ Save token and phone
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("phone", "+91" + phone); // ✅ Add this line
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("phone", "+91" + phone);
 
-    setVerified(true);
-
-    // ✅ Redirect to profile page after successful login
-// ✅ Redirect to profile and reload
-navigate("/profile");
-setTimeout(() => {
-  window.location.reload();
-}, 500); // 0.5 second delay to allow redirect before reload
-
-  } catch (err) {
-    setError(err.response?.data?.message || "Invalid OTP");
-  }
-};
-
+      setVerified(true);
+      navigate("/");
+      setTimeout(() => window.location.reload(), 500);
+    } catch (err) {
+      setError(err.response?.data?.message || "Invalid OTP");
+    }
+  };
 
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
@@ -123,6 +125,18 @@ setTimeout(() => {
               </>
             )}
 
+            {loading && (
+              <p className="text-yellow-400 text-sm text-center mb-3">
+                📤 Sending OTP... Please wait
+              </p>
+            )}
+
+            {timer > 0 && !loading && (
+              <p className="text-blue-400 text-sm text-center mb-3">
+                ⏳ Waiting... {timer}s
+              </p>
+            )}
+
             {error && (
               <p className="text-red-500 text-sm text-center mb-3">{error}</p>
             )}
@@ -130,9 +144,10 @@ setTimeout(() => {
             {!sent ? (
               <button
                 onClick={sendOTP}
+                disabled={loading}
                 className="w-full bg-[#005243] hover:bg-[#007C60] text-white py-3 rounded-md font-semibold transition-colors duration-300"
               >
-                Send OTP
+                {loading ? "Sending..." : "Send OTP"}
               </button>
             ) : (
               <button
