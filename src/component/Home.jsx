@@ -30,9 +30,26 @@ export default function Home() {
   Connect with 1500+ Verified Suppliers. Enjoy Flexible Financing &amp; Smart Logistics
 </p>
           <Link to="/contact">
-            <button className="demo inline-block bg-[#005243] text-white px-8 py-3 rounded-lg font-semibold shadow-lg text-base hover:bg-[#008b7b] transition pointer-events-auto cursor-pointer">
-              JOIN US NOW
-            </button>
+           <button
+                  onClick={() => navigate(category.link)}
+                  className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+                             bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+                             shadow-lg shadow-[#00B3A350] 
+                             transition-all duration-300 ease-out
+                             hover:scale-105 hover:shadow-[#00B3A390]
+                             active:scale-95 overflow-hidden group"
+                >
+                  <span className="relative z-10">JOIN US NOW</span>
+                  <span
+                    className="absolute inset-0 bg-gradient-to-r from-[#00B3A3] to-[#005243]
+                               opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-300"
+                  />
+                  <span
+                    className="absolute top-0 left-[-75%] w-[50%] h-full 
+                               bg-gradient-to-r from-transparent via-white/30 to-transparent
+                               transform skew-x-12 animate-shimmer"
+                  />
+                </button>
           </Link>
         </div>
       </div>
