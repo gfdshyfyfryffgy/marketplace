@@ -7,13 +7,23 @@ import Tilt from "react-parallax-tilt";
 gsap.registerPlugin(ScrollTrigger);
 
 const newsItems = [
-  { title: "New Feature: Predictive ETAs Launched!", date: "May 15, 2025",
-    description: "Our new predictive ETA feature helps you anticipate delivery times with greater accuracy." },
-  { title: "Marketplace Expands to Southeast Asia", date: "May 10, 2025",
-    description: "We are excited to announce our expansion into key markets across Southeast Asia." },
-  { title: "How to Optimize Your Procurement Process", date: "May 05, 2025",
-    description: "Discover best practices for efficient procurement in our latest blog post." },
+  { 
+    title: "Predictive ETA Tool Now Available", 
+    date: "May 15, 2025",
+    description: "Our new predictive ETA tool lets you plan shipments with more accuracy and ease." 
+  },
+  { 
+    title: "Marketplace Expands in Southeast Asia", 
+    date: "May 10, 2025",
+    description: "We are thrilled to bring our platform to key, high-growth Southeast Asian markets." 
+  },
+  { 
+    title: "Guide to Optimizing Procurement Steps", 
+    date: "May 05, 2025",
+    description: "Read our latest guide on streamlining procurement for faster, smarter decisions." 
+  },
 ];
+
 
 const NewsUpdatesSection = () => {
   const sectionRef = useRef(null);

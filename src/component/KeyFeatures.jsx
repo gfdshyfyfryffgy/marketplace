@@ -13,34 +13,35 @@ const features = [
   {
     icon: <ShieldCheck className="text-[#00B3A3] w-12 h-12" />,
     title: "1500+ Verified Suppliers",
-    description: "Trusted suppliers offering quality assurance across industries.",
+    description: "Reliable, vetted suppliers delivering quality and trust worldwide.",
   },
   {
     icon: <Truck className="text-[#00B3A3] w-12 h-12" />,
     title: "700+ Logistics Partners",
-    description: "Nationwide network with real-time smart tracking.",
+    description: "Nationwide delivery network with live shipment tracking services.",
   },
   {
     icon: <Shapes className="text-[#00B3A3] w-12 h-12" />,
     title: "Wide Industrial Range",
-    description: "One-stop access to a variety of industrial-grade products.",
+    description: "One-stop access to diverse, high-grade industrial products.",
   },
   {
     icon: <BarChart3 className="text-[#00B3A3] w-12 h-12" />,
     title: "Real-Time Analytics",
-    description: "Data-driven insights to power better decisions.",
+    description: "Powerful insights and reporting to guide your key decisions.",
   },
   {
     icon: <CreditCard className="text-[#00B3A3] w-12 h-12" />,
     title: "Flexible Payments",
-    description: "Part-payment and financing options to ease transactions.",
+    description: "Easy part-payment plans and finance options for smooth deals.",
   },
   {
     icon: <LayoutGrid className="text-[#00B3A3] w-12 h-12" />,
     title: "Personalized Dashboard",
-    description: "Custom tools and data views tailored for your needs.",
+    description: "Tailored tools and views built to fit your business workflow.",
   },
 ];
+
 
 export default function KeyFeatures() {
   return (
@@ -49,7 +50,7 @@ export default function KeyFeatures() {
         <h2 className="text-4xl font-bold text-white mb-16">Key Features</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature, index) => (
-            <Tilt tiltMaxAngleX={30} tiltMaxAngleY={30} glareEnable={false}>
+            <Tilt tiltMaxAngleX={20} tiltMaxAngleY={20} glareEnable={false}>
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
