@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
-
+import { Typewriter } from "react-simple-typewriter";
 export default function Home() {
   return (
     <main className="relative w-full min-h-screen bg-black overflow-hidden flex items-center">
@@ -9,18 +9,28 @@ export default function Home() {
       <div className="absolute left-0 top-0 h-full w-full flex flex-col justify-center pl-16 z-10 pointer-events-none">
         <div className="max-w-xl">
           <h1 className="text text-white text-5xl md:text-6xl font-semibold leading-tight mb-3">
-            India’s Leading
-            <br />
-            B2B Marketplace
-            <br />
-            <span className="text-[#00B3A3] font-normal">for business</span>
-          </h1>
-          <p className="mt-4 text-[#C1C1C1] text-lg mb-8 font-light">
-            Connect with 1500+ Verified Suppliers. Enjoy Flexible Financing
-            &amp; Smart Logistics
-          </p>
+  India’s Leading
+  <br />
+  B2B Marketplace
+  <br />
+  <span className="text-[#00B3A3] font-normal">
+    <Typewriter
+      words={["for business", "for suppliers", "for buyers"]}
+      loop={0}
+      cursor
+      cursorStyle="|"
+      typeSpeed={70}
+      deleteSpeed={50}
+      delaySpeed={1500}
+    />
+  </span>
+</h1>
+
+<p className="mt-4 text-[#C1C1C1] text-lg mb-8 font-light">
+  Connect with 1500+ Verified Suppliers. Enjoy Flexible Financing &amp; Smart Logistics
+</p>
           <Link to="/contact">
-            <button className="demo inline-block bg-[#005243] text-white px-8 py-3 rounded-lg font-semibold shadow-lg text-base hover:bg-[#008b7b] transition pointer-events-auto">
+            <button className="demo inline-block bg-[#005243] text-white px-8 py-3 rounded-lg font-semibold shadow-lg text-base hover:bg-[#008b7b] transition pointer-events-auto cursor-pointer">
               JOIN US NOW
             </button>
           </Link>

@@ -27,6 +27,7 @@ import Admin from "./Product/Admin";
 import Form from "./Product/Form"
 
 import MyProfile from "./Login/MyProfile";
+import AnimatedCursor from "./component/AnimatedCursor";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -45,6 +46,7 @@ function App() {
     <>
     
       <Navbar />
+      <AnimatedCursor/>
        <Routes>
          <Route path="/" element={<AllSection />} />
          <Route path="/steel" element={<Steel />} />

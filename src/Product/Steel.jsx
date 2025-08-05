@@ -167,7 +167,7 @@ const FAQ = () => {
 
   return (
     <section className="bg-[#111] py-12 px-6 md:px-12 rounded-xl shadow-lg mb-12">
-      <h3 className="text-3xl font-bold text-center text-white mb-8">
+      <h3 className="text-3xl font-bold text-center text-white mb-8 ">
         Mild Steel FAQs
       </h3>
       <div className="max-w-4xl mx-auto">
@@ -207,12 +207,24 @@ const FAQ = () => {
   );
 };
 
+
+ 
+
 // Requirement Form Component with Buy/Sell Switch and GST field
 
 // Price List Component
 const PriceList = () => {
   const listRef = useRef([]);
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true); // ✅ now actions and price will be visible after login
+    }
+  }, []);
+
   useEffect(() => {
     if (listRef.current.length) {
       gsap.fromTo(
@@ -231,88 +243,102 @@ const PriceList = () => {
 
   return (
     <section className="bg-[#111] py-10 px-6 rounded-xl shadow-lg mb-12 w-320">
-      <div className="max-w-2xl mx-auto w-full">
-        <h2 className="text-2xl font-bold text-white mb-8 text-center">
-          Mild Steel Most Viewed Prices
-        </h2>
-        <div className="overflow-x-auto w-300 ml-[-260px] ">
-          <table className="w-full table-auto bg-[#191919] rounded-lg shadow">
-            <thead>
-              <tr>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Product
-                </th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Location
-                </th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Price
-                </th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {priceData.map((item, index) => (
-                <tr
-                  key={index}
-                  ref={(el) => (listRef.current[index] = el)}
-                  className="border-t border-b border-[#222] hover:bg-[#171717] transition-colors duration-300"
-                  tabIndex={0}
-                  style={{ outline: "none" }}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") window.location.href = item.href;
-                  }}
-                  title="View Product Details"
-                >
-                  <td className="py-4 px-4 text-sm text-white">
-                    {item.product}
-                  </td>
-                  <td className="py-4 px-4 text-sm text-white">
-                    {item.location}
-                  </td>
-                  <td className="py-4 px-4 text-sm text-white">{item.price}</td>
-                  <td className="py-4 px-4 text-sm text-white flex">
-                    {item.actions.map((action, idx) => (
-                      <button
-                        key={idx}
-                        className={`mr-2 px-4 py-2 rounded-md font-semibold transition-colors duration-300 text-xs cursor-pointer ${
-                          action === "Buy"
-                            ? "bg-[#005243] text-white hover:bg-[#007C60]"
-                            : action === "Sell"
-                            ? "bg-[#d41818] text-white hover:bg-[#ff4d4d]"
-                            : "bg-[#444] text-white hover:bg-[#666]"
-                        }`}
-                        onClick={(e) => {
-                          e.stopPropagation(); // prevents row click
-                          navigate(
-                            `/form?product=${encodeURIComponent(item.product)}`
-                          ); // ✅ navigate to form page
-                        }}
-                      >
-                        {action}
-                      </button>
-                    ))}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {/* Optionally, you can add a view more button */}
-        <div className="text-center">
-          <button
-            className="mt-8 bg-[#005243] text-white px-8 py-3 rounded-md hover:bg-[#007C60] font-semibold shadow-lg transition-colors duration-300"
-            onClick={() => (window.location.href = "")}
-          >
-            View All Prices
-          </button>
-        </div>
-      </div>
-    </section>
+  <div className="max-w-2xl mx-auto w-full">
+    <h2 className="text-2xl font-bold text-white mb-8 text-center ">
+      Mild Steel Most Viewed Prices
+    </h2>
+
+    <div className="overflow-x-auto w-300 ml-[-260px] ">
+      <table className="w-full table-auto bg-[#191919] rounded-lg shadow">
+        <thead>
+          <tr>
+            <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+              Product
+            </th>
+            <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+              Location
+            </th>
+            <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+              Price
+            </th>
+            <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+  {priceData.map((item, index) => (
+    <tr
+      key={index}
+      ref={(el) => (listRef.current[index] = el)}
+      className="border-t border-b border-[#222] hover:bg-[#171717] transition-colors duration-300"
+    >
+      <td className="py-4 px-4 text-sm text-white">{item.product}</td>
+      <td className="py-4 px-4 text-sm text-white">{item.location}</td>
+
+      <td className="py-4 px-4 text-sm text-white">
+        {(index < 3 || isLoggedIn) ? (
+          item.price
+        ) : (
+          <span style={{ color: 'gray' }}>---- (Login to view)</span>
+        )}
+      </td>
+
+      <td className="py-4 px-4 text-sm text-white flex">
+        {(index < 3 || isLoggedIn) ? (
+          item.actions?.map((action, idx) => (
+            <button
+              key={idx}
+              className={`mr-2 px-4 py-2 rounded-md font-semibold transition-colors duration-300 text-xs cursor-pointer ${
+                action === "Buy"
+                  ? "bg-[#005243] text-white hover:bg-[#007C60]"
+                  : action === "Sell"
+                  ? "bg-[#d41818] text-white hover:bg-[#ff4d4d]"
+                  : "bg-[#444] text-white hover:bg-[#666]"
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/form?product=${encodeURIComponent(item.product)}`);
+              }}
+            >
+              {action}
+            </button>
+          ))
+        ) : (
+          // ✅ Show clickable "Login to view"
+<span
+  onClick={() => navigate("/login", { state: { from: window.location.pathname } })}
+  className="inline-block border border-[#005243] text-[#fff] text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#00B3A3] hover:text-black transition-colors duration-300 cursor-pointer"
+>
+  Login to view
+</span>
+
+
+        )}
+      </td>
+    </tr>
+  ))}
+</tbody>
+
+      </table>
+    </div>
+
+    {/* ✅ View more button */}
+    <div className="text-center">
+      <button
+        className="mt-8 bg-[#005243] text-white px-8 py-3 rounded-md hover:bg-[#007C60] font-semibold shadow-lg transition-colors duration-300"
+        onClick={() => (window.location.href = "")}
+      >
+        View All Prices
+      </button>
+    </div>
+  </div>
+</section>
+
   );
 };
+
 
 // Main Combined Section
 const Steel = () => {
@@ -334,7 +360,7 @@ const Steel = () => {
 
   return (
     <div className="bg-[#000] min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 mt-10">
         {/* Hero Title */}
         <h1
           ref={heroRef}

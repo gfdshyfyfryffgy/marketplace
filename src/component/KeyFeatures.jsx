@@ -7,6 +7,7 @@ import {
   LayoutGrid,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Tilt from "react-parallax-tilt";
 
 const features = [
   {
@@ -48,6 +49,7 @@ export default function KeyFeatures() {
         <h2 className="text-4xl font-bold text-white mb-16">Key Features</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature, index) => (
+            <Tilt tiltMaxAngleX={30} tiltMaxAngleY={30} glareEnable={false}>
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -62,6 +64,7 @@ export default function KeyFeatures() {
               </h3>
               <p className="text-sm text-[#C1C1C1]">{feature.description}</p>
             </motion.div>
+            </Tilt>
           ))}
         </div>
       </div>

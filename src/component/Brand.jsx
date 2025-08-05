@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import axios from "axios";
+
 
 // Import your images (or use dynamic data from axios)
 import nike from "../assets/jjs.png";
@@ -48,7 +48,7 @@ export default function Brand() {
       opacity: 1,
       duration: 1,
       stagger: 0.1,
-      ease: "power3.out",
+      ease: "elastic.out(1, 0.7)",
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top 85%",

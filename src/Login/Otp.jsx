@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Otp = () => {
@@ -10,8 +11,10 @@ const Otp = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [timer, setTimer] = useState(0);
-
+ const location = useLocation();
   const navigate = useNavigate();
+  const fromPage = location.state?.from || "/";
+ 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -55,23 +58,28 @@ const Otp = () => {
   };
 
   const verifyOTP = async () => {
-    setError("");
-    try {
-      const response = await axios.post("https://backend-39h3.onrender.com/verify-otp", {
-        phone: "+91" + phone,
-        otp,
-      });
+  setError("");
+  try {
+    const response = await axios.post("https://backend-39h3.onrender.com/verify-otp", {
+      phone: "+91" + phone,
+      otp,
+    });
 
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("phone", "+91" + phone);
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("phone", "+91" + phone);
 
-      setVerified(true);
-      navigate("/");
-      setTimeout(() => window.location.reload(), 500);
-    } catch (err) {
-      setError(err.response?.data?.message || "Invalid OTP");
-    }
-  };
+    setVerified(true);
+
+    // ✅ Redirect to the previous page instead of always "/"
+
+
+    setTimeout(() => window.location.reload(), 500);
+    navigate(fromPage, { replace: true });
+  } catch (err) {
+    setError(err.response?.data?.message || "Invalid OTP");
+  }
+};
+
 
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
