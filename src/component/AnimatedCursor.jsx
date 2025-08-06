@@ -1,54 +1,41 @@
-// AnimatedCursor.jsx
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
-export default function AnimatedCursor() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+const AnimatedCursor = () => {
+  const [isPointer, setIsPointer] = useState(false);
+
+  // Track mouse position
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Add spring animation for trailing effect
+  const springX = useSpring(mouseX, { damping: 20, stiffness: 150 });
+  const springY = useSpring(mouseY, { damping: 20, stiffness: 150 });
 
   useEffect(() => {
-    const mouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+    const moveCursor = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+
+      // Detect if hovering interactive element
+      const isHoveringClickable = e.target.closest("a, button, input, textarea, select, [role='button'], [onclick]");
+      setIsPointer(!!isHoveringClickable);
     };
-    window.addEventListener("mousemove", mouseMove);
-    return () => window.removeEventListener("mousemove", mouseMove);
-  }, []);
+
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, [mouseX, mouseY]);
 
   return (
-    <>
-      {/* Hide default cursor */}
-      <style>{`body { cursor: none; }`}</style>
-
-      {/* Main cursor */}
-      <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
-        animate={{
-          x: mousePos.x - 12,
-          y: mousePos.y - 12,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 300,
-          damping: 20,
-        }}
-      >
-        <div className="w-6 h-6 rounded-full border-2 border-[#00B3A3]"></div>
-      </motion.div>
-
-      {/* Inner dot */}
-      <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
-        animate={{
-          x: mousePos.x - 4,
-          y: mousePos.y - 4,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 25,
-        }}
-      >
-        <div className="w-2 h-2 rounded-full bg-[#00B3A3]"></div>
-      </motion.div>
-    </>
+    <motion.div
+      className={`fixed top-0 left-0 w-5 h-5 rounded-full z-[9999] pointer-events-none
+                  ${isPointer ? "opacity-0" : "bg-[#00B3A3] "}`}
+      style={{
+        translateX: springX,
+        translateY: springY,
+      }}
+    />
   );
-}
+};
+
+export default AnimatedCursor;

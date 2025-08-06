@@ -62,18 +62,19 @@ const Footer = () => {
             data-aos-delay={index * 100}
             className="break-words"
           >
-            <h4 className="text-white font-semibold mb-3 relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-0 after:h-[2px] after:bg-[#00B3A3] after:transition-all hover:after:w-full">
-              {section.title}
-            </h4>
-            <ul className="space-y-2">
+           <h4 className="text-white font-semibold mb-3 relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-0 after:h-[2px] after:bg-[#00B3A3] after:transition-all hover:after:w-full cursor-pointer">
+  {section.title}
+</h4>
+
+            <ul className="space-y-2 !cursor-pointer">
               {section.links.map((link, idx) => (
                 <li key={idx}>
                   <a
                     href="#"
-                    className="relative hover:text-[#00B3A3] transition duration-300 group"
+                    className="relative hover:text-[#00B3A3] transition duration-300 group !cursor-pointer"
                   >
                     {link}
-                    <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-[#00B3A3] group-hover:w-full transition-all duration-300"></span>
+                    <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-[#00B3A3] group-hover:w-full transition-all duration-300 !cursor-pointer"></span>
                   </a>
                 </li>
               ))}
@@ -83,12 +84,12 @@ const Footer = () => {
       </div>
 
       {/* 🔹 Social Icons */}
-      <div className="relative flex justify-center gap-5 pb-8">
+      <div className="relative flex justify-center gap-5 pb-8 !cursor-pointer">
         {[FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter].map((Icon, i) => (
           <a
             key={i}
             href="#"
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-[#00B3A3] text-[#00B3A3] hover:bg-[#00B3A3] hover:text-black transition-all duration-300"
+            className="w-10 h-10 flex items-center justify-center rounded-full border border-[#00B3A3] text-[#00B3A3] hover:bg-[#00B3A3] hover:text-black transition-all duration-300 !cursor-pointer"
           >
             <Icon size={16} />
           </a>

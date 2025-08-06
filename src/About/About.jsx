@@ -1,6 +1,6 @@
 import {React,useState} from "react";
 import { Link } from "react-router-dom";
-import map from "../assets/map22.png"; // Correct import syntax
+import map from "../assets/map.jpg"; // Correct import syntax
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import Steel from "../assets/steel.png";
@@ -55,13 +55,14 @@ const About = () => {
             the best materials at the right price.
           </p>
           <div className="flex gap-6 mt-6">
+            
             <Link to="/contact">
-              <button className="px-6 py-3 bg-[#005243] hover:bg-[#007a68] text-white rounded-md font-semibold transition">
-                Learn More
-              </button>
-            </Link>
-            <Link to="/contact">
-              <button className="px-6 py-3 bg-[#00B3A3] hover:bg-[#009c93] text-white rounded-md font-semibold transition">
+              <button className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+             bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+             shadow-lg shadow-[#00B3A350] 
+             transition-all duration-300 ease-out
+             hover:scale-105 hover:shadow-[#00B3A390]
+             active:scale-95 overflow-hidden group !cursor-pointer">
                 Contact Us
               </button>
             </Link>
@@ -134,30 +135,13 @@ const About = () => {
           <span className="text-white font-bold">30+ countries</span> with
           strategic warehouses and logistics partners.
         </p>
-        <div className="mt-6 relative w-full max-w-3xl mx-auto">
+        <div className="mt-6 relative w-full max-w-6xl mx-auto">
           <img
             src={map}
             alt="World Map"
-            className="w-full rounded-xl border border-[#333]"
+            className="ml-15 w-[999px] h-150 rounded-xl "
           />
-          <span className="absolute top-[30%] left-[25%] text-[#00B3A3] text-2xl animate-bounce">
-            📍
-          </span>
-          <span className="absolute top-[40%] left-[55%] text-[#00B3A3] text-2xl animate-bounce">
-            📍
-          </span>
-          <span className="absolute top-[35%] left-[70%] text-[#00B3A3] text-2xl animate-bounce">
-            📍
-          </span>
-          <span className="absolute top-[50%] left-[80%] text-[#00B3A3] text-2xl animate-bounce">
-            📍
-          </span>
-          <span className="absolute top-[45%] left-[15%] text-[#00B3A3] text-2xl animate-bounce">
-            📍
-          </span>
-          <span className="absolute top-[60%] left-[35%] text-[#00B3A3] text-2xl animate-bounce">
-            📍
-          </span>
+         
         </div>
       </div>
 
@@ -201,18 +185,32 @@ const About = () => {
           </p>
         </div>
 
-        <div className="mt-24 text-left space-y-4 mr-[-150px]">
-          <Link to="/contact">
-            <button className="mt-6 px-6 py-3 bg-[#00B3A3] hover:bg-[#009c93] text-white rounded-md font-semibold transition">
-              Contact Us
-            </button>
-          </Link>
-          <Link to="/categories">
-            <button className="mt-6 ml-4 px-6 py-3 bg-[#005243] hover:bg-[#007a68] text-white rounded-md font-semibold transition">
-              View Products
-            </button>
-          </Link>
-        </div>
+        <div className="text-center mt-16 mr-[-30]">
+  {/* Contact Us Button - Green Teal Gradient */}
+  <Link to="/contact">
+    <button className="mt-6 mr-2 relative px-6 py-2 rounded-full text-white font-semibold 
+      bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+      shadow-lg shadow-[#00B3A350] 
+      transition-all duration-300 ease-out
+      hover:scale-105 hover:shadow-[#00B3A390]
+      active:scale-95 overflow-hidden group cursor-pointer">
+      Contact Us
+    </button>
+  </Link>
+
+  {/* View Products Button - Teal to Gray Gradient */}
+  <Link to="/categories">
+    <button className="mt-6 mr-8 relative px-6 py-2 rounded-full text-white font-semibold 
+      bg-gradient-to-r from-[#00B3A3] to-[#C1C1C1] 
+      shadow-lg shadow-[#C1C1C140] 
+      transition-all duration-300 ease-out
+      hover:scale-105 hover:shadow-[#C1C1C180]
+      active:scale-95 overflow-hidden group cursor-pointer">
+      View Products
+    </button>
+  </Link>
+</div>
+
       </div>
 
       {/* Statistics Section */}

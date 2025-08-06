@@ -166,11 +166,12 @@ const PriceList = () => {
   const listRef = useRef([]);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showAll, setShowAll] = useState(false); // <== NEW
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setIsLoggedIn(true); // ✅ now actions and price will be visible after login
+      setIsLoggedIn(true);
     }
   }, []);
 
@@ -188,12 +189,15 @@ const PriceList = () => {
         }
       );
     }
-  }, []);
+  }, [showAll]); // re-run animation on toggle
+
+  // Limit items unless showAll is true
+  const visibleData = showAll ? priceData : priceData.slice(0, 6);
 
   return (
     <section className="bg-[#111] py-10 px-6 rounded-xl shadow-lg mb-12 w-320">
       <div className="max-w-2xl mx-auto w-full">
-        <h2 className="text-2xl font-bold text-white mb-8 text-center">
+        <h2 className="text-2xl font-bold text-white mb-8 text-center ">
           Mild Steel Most Viewed Prices
         </h2>
 
@@ -217,62 +221,49 @@ const PriceList = () => {
             </thead>
 
             <tbody>
-              {priceData.map((item, index) => (
+              {visibleData.map((item, index) => (
                 <tr
                   key={index}
                   ref={(el) => (listRef.current[index] = el)}
                   className="border-t border-b border-[#222] hover:bg-[#171717] transition-colors duration-300"
                 >
-                  <td className="py-4 px-4 text-sm text-white">
-                    {item.product}
-                  </td>
-                  <td className="py-4 px-4 text-sm text-white">
-                    {item.location}
-                  </td>
-
+                  <td className="py-4 px-4 text-sm text-white">{item.product}</td>
+                  <td className="py-4 px-4 text-sm text-white">{item.location}</td>
                   <td className="py-4 px-4 text-sm text-white">
                     {index < 3 || isLoggedIn ? (
                       item.price
                     ) : (
-                      <span style={{ color: "gray" }}>
-                        ---- (Login to view)
-                      </span>
+                      <span style={{ color: "gray" }}>---- (Login to view)</span>
                     )}
                   </td>
-
                   <td className="py-4 px-4 text-sm text-white flex">
                     {index < 3 || isLoggedIn ? (
                       item.actions?.map((action, idx) => (
                         <button
                           key={idx}
-                          className={`mr-2 px-4 py-2 rounded-md font-semibold transition-colors duration-300 text-xs cursor-pointer ${
+                          className={`mr-2 px-4 py-2 rounded-md font-semibold transition-colors duration-300 text-xs !cursor-pointer ${
                             action === "Buy"
                               ? "bg-[#005243] text-white hover:bg-[#007C60]"
-                              : action === "Sell"
-                              ? "bg-[#d41818] text-white hover:bg-[#ff4d4d]"
-                              : "bg-[#444] text-white hover:bg-[#666]"
+                              : "bg-[#d41818] text-white hover:bg-[#ff4d4d]"
                           }`}
                           onClick={(e) => {
                             e.stopPropagation();
-                            navigate(
-                              `/form?product=${encodeURIComponent(
-                                item.product
-                              )}`
-                            );
+                            navigate(`/form?product=${encodeURIComponent(item.product)}`);
                           }}
                         >
                           {action}
                         </button>
                       ))
                     ) : (
-                      // ✅ Show clickable "Login to view"
                       <span
+                        role="button"
+                        tabIndex={0}
                         onClick={() =>
                           navigate("/login", {
                             state: { from: window.location.pathname },
                           })
                         }
-                        className="inline-block border border-[#005243] text-[#fff] text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#00B3A3] hover:text-black transition-colors duration-300 cursor-pointer"
+                        className="inline-block border border-[#005243] text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#00B3A3] hover:text-black transition-colors duration-300 !cursor-pointer focus:outline-none"
                       >
                         Login to view
                       </span>
@@ -283,19 +274,26 @@ const PriceList = () => {
             </tbody>
           </table>
         </div>
-        {/* Optionally, you can add a view more button */}
+
+        {/* Toggle View All / View Less */}
         <div className="text-center">
           <button
-            className="mt-8 bg-[#005243] text-white px-8 py-3 rounded-md hover:bg-[#007C60] font-semibold shadow-lg transition-colors duration-300"
-            onClick={() => (window.location.href = "")}
+            className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+              bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+              shadow-lg shadow-[#00B3A350] 
+              transition-all duration-300 ease-out
+              hover:scale-105 hover:shadow-[#00B3A390]
+              active:scale-95 overflow-hidden group cursor-pointer"
+            onClick={() => setShowAll((prev) => !prev)}
           >
-            View All Prices
+            {showAll ? "View Less" : "View All Prices"}
           </button>
         </div>
       </div>
     </section>
   );
 };
+
 
 // Main Combined Section
 const Pipes = () => {

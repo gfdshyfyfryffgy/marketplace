@@ -158,33 +158,46 @@ const Product = () => {
       </section>
 
       {/* Product Grid */}
-      <section className="bg-black px-6 md:px-16 py-16 w-full">
-        <h2 className="text-white text-4xl font-bold mb-8 text-center">
-          Explore Our Products
-        </h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {categories.map((item, index) => (
-            <Link to={item.link} key={index}>
-              <div className="bg-[#1A1A1A] rounded-xl overflow-hidden hover:scale-[1.02] hover:-translate-y-1 transition-transform duration-300 ease-in-out shadow-md hover:shadow-lg">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-40 object-cover"
-                />
-                <div className="p-4 space-y-2">
-                  <h3 className="text-white text-xl font-semibold">
-                    {item.title}
-                  </h3>
-                  <p className="text-[#C1C1C1] text-sm">{item.desc}</p>
-                  <button className="mt-2 px-4 py-2 bg-[#005243] text-white rounded-full hover:bg-[#007a68] transition">
-                    Enquire Now
-                  </button>
-                </div>
-              </div>
-            </Link>
-          ))}
+      {/* Product Grid */}
+<section className="bg-black px-6 md:px-16 py-16 w-full">
+  <h2 className="text-white text-4xl font-bold mb-8 text-center">
+    Explore Our Products
+  </h2>
+
+  <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    {categories.map((item, index) => (
+      <div
+        key={index}
+       className="relative bg-[#0f0f0f]/90 backdrop-blur-lg rounded-2xl overflow-hidden 
+                         border border-[#1f1f1f] hover:border-[#00B3A3] 
+                         shadow-lg hover:shadow-[#00B3A360] 
+                         transition-all duration-500 flex flex-col group">
+        <img
+          src={item.image}
+          alt={item.title}
+                  className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="p-4 space-y-2">
+          <h3 className="text-white text-xl font-semibold">{item.title}</h3>
+          <p className="text-[#C1C1C1] text-sm">{item.desc}</p>
+
+          {/* Only the button navigates */}
+          <Link to={item.link}>
+            <button className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+             bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+             shadow-lg shadow-[#00B3A350] 
+             transition-all duration-300 ease-out
+             hover:scale-105 hover:shadow-[#00B3A390]
+             active:scale-95 overflow-hidden group !cursor-pointer">
+              Enquire Now
+            </button>
+          </Link>
         </div>
-      </section>
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* Brand Section */}
       <Brand />

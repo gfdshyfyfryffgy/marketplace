@@ -97,25 +97,30 @@ export default function ProductCategories() {
 
                 {/* Enquire Button */}
                 <button
-                  onClick={() => navigate(category.link)}
-                  className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
-                             bg-gradient-to-r from-[#005243] to-[#00B3A3] 
-                             shadow-lg shadow-[#00B3A350] 
-                             transition-all duration-300 ease-out
-                             hover:scale-105 hover:shadow-[#00B3A390]
-                             active:scale-95 overflow-hidden group"
-                >
-                  <span className="relative z-10">Enquire Now</span>
-                  <span
-                    className="absolute inset-0 bg-gradient-to-r from-[#00B3A3] to-[#005243]
-                               opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-300"
-                  />
-                  <span
-                    className="absolute top-0 left-[-75%] w-[50%] h-full 
-                               bg-gradient-to-r from-transparent via-white/30 to-transparent
-                               transform skew-x-12 animate-shimmer"
-                  />
-                </button>
+  onClick={() => navigate(category.link)}
+  className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+             bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+             shadow-lg shadow-[#00B3A350] 
+             transition-all duration-300 ease-out
+             hover:scale-105 hover:shadow-[#00B3A390]
+             active:scale-95 overflow-hidden group !cursor-pointer"
+>
+  <span className="relative z-10">Enquire Now</span>
+
+  {/* Blur glow hover layer */}
+  <span
+    className="absolute inset-0 bg-gradient-to-r from-[#00B3A3] to-[#005243]
+               opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-300 pointer-events-none"
+  />
+
+  {/* Shimmer animation */}
+  <span
+    className="absolute top-0 left-[-75%] w-[50%] h-full 
+               bg-gradient-to-r from-transparent via-white/30 to-transparent
+               transform skew-x-12 animate-shimmer pointer-events-none"
+  />
+</button>
+
               </div>
             </motion.div>
           ))}

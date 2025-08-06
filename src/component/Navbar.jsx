@@ -48,17 +48,17 @@ export default function Navbar() {
   return (
     <nav
       className={`w-full fixed top-0 z-50 transition-all duration-300 
-      ${scrolled ? "py-2 bg-black/80 backdrop-blur-md shadow-md" : "py-4 bg-black"}`}
+      ${
+        scrolled
+          ? "py-2 bg-black/80 backdrop-blur-md shadow-md"
+          : "py-4 bg-black"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-        
         {/* Logo */}
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Link
-            to="/"
-            className="text-white font-bold text-2xl"
-          >
-            Marketplace 
+          <Link to="/" className="text-white font-bold text-2xl">
+            Marketplace
           </Link>
         </motion.div>
 
@@ -74,19 +74,19 @@ export default function Navbar() {
         </div>
 
         {/* Links (Desktop) */}
-        <div className="hidden lg:flex space-x-6 text-[#C1C1C1] font-medium">
+        <div className="hidden lg:flex space-x-6 text-[#C1C1C1] font-medium cursor-pointer">
           {navLinks.map((item) => (
             <Link
               key={item.name}
               to={item.path}
-              className="relative hover:text-white transition"
+              className="relative hover:text-white transition !cursor-pointer"
             >
               {item.name}
               <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#00B3A3] transition-all duration-300 hover:w-full"></span>
             </Link>
           ))}
           {isLoggedIn && (
-            <Link to="/admin" className="hover:text-white">
+            <Link to="/admin" className="hover:text-white cursor-pointer">
               Admin
             </Link>
           )}
@@ -98,7 +98,7 @@ export default function Navbar() {
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0px 0px 10px #00B3A3" }}
               onClick={() => navigate("/login")}
-              className="bg-[#005243] text-white px-4 py-2 rounded-full font-medium transition"
+              className="bg-[#005243] text-white px-4 py-2 rounded-full font-medium transition !cursor-pointer"
             >
               Login
             </motion.button>
