@@ -288,11 +288,15 @@ const PriceList = () => {
                       item.actions?.map((action, idx) => (
                         <button
                           key={idx}
-                          className={`mr-2 px-4 py-2 rounded-md font-semibold transition-colors duration-300 text-xs !cursor-pointer ${
-                            action === "Buy"
-                              ? "bg-[#005243] text-white hover:bg-[#007C60]"
-                              : "bg-[#d41818] text-white hover:bg-[#ff4d4d]"
-                          }`}
+                          className={`mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+  text-xs transition-all duration-300 ease-out 
+  shadow-lg overflow-hidden group cursor-pointer 
+  active:scale-95 hover:scale-105 
+  ${
+    action === "Buy"
+      ? "bg-gradient-to-r from-[#005243] to-[#00B3A3] shadow-[#00B3A350] hover:shadow-[#00B3A390]"
+      : "bg-gradient-to-r from-[#8B0000] to-[#d41818] shadow-[#d4181850] hover:shadow-[#ff4d4d90]"
+  }`}
                           onClick={(e) => {
                             e.stopPropagation();
                             navigate(`/form?product=${encodeURIComponent(item.product)}`);
@@ -310,8 +314,11 @@ const PriceList = () => {
                             state: { from: window.location.pathname },
                           })
                         }
-                        className="inline-block border border-[#005243] text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#00B3A3] hover:text-black transition-colors duration-300 !cursor-pointer focus:outline-none"
-                      >
+className="inline-block text-xs font-semibold px-5 py-2 rounded-full 
+text-white bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+hover:from-[#00B3A3] hover:to-[#005243] hover:text-white 
+shadow-md hover:shadow-lg transition-all duration-300 
+cursor-pointer focus:outline-none relative overflow-hidden group"                      >
                         Login to view
                       </span>
                     )}

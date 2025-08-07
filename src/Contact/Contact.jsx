@@ -96,8 +96,12 @@ const Contact = () => {
 
           <button
             type="submit"
-            className="w-full py-3 bg-[#005243] hover:bg-[#007a68] text-white rounded-md font-semibold transition duration-300 !cursor-pointer"
-          >
+ className="mt-6 w-130 relative px-6 py-2 rounded-full text-white font-semibold 
+      bg-gradient-to-r from-[#00B3A3] to-[#C1C1C1] 
+      shadow-lg shadow-[#C1C1C140] 
+      transition-all duration-300 ease-out
+      hover:scale-105 hover:shadow-[#C1C1C180]
+      active:scale-95 overflow-hidden group cursor-pointer"          >
             Send Message
           </button>
         </form>

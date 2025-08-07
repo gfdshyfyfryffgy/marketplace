@@ -185,7 +185,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="text-center mt-16 mr-[-30]">
+        <div className="text-center mt-16 ml-40">
   {/* Contact Us Button - Green Teal Gradient */}
   <Link to="/contact">
     <button className="mt-6 mr-2 relative px-6 py-2 rounded-full text-white font-semibold 
@@ -200,7 +200,7 @@ const About = () => {
 
   {/* View Products Button - Teal to Gray Gradient */}
   <Link to="/categories">
-    <button className="mt-6 mr-8 relative px-6 py-2 rounded-full text-white font-semibold 
+    <button className="mt-6 mr-8.5 relative px-6 py-2 rounded-full text-white font-semibold 
       bg-gradient-to-r from-[#00B3A3] to-[#C1C1C1] 
       shadow-lg shadow-[#C1C1C140] 
       transition-all duration-300 ease-out

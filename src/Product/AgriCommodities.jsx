@@ -21,7 +21,8 @@ const faqData = [
   },
   {
     question: "Are the Agri-Commodities export quality?",
-    answer: "Yes, we supply both domestic and export-grade Agri-Commodities as per client requirements.",
+    answer:
+      "Yes, we supply both domestic and export-grade Agri-Commodities as per client requirements.",
   },
   {
     question: "Can I get a bulk quote for Agri-Commodities?",
@@ -91,7 +92,6 @@ const priceData = [
     href: "/form",
   },
 ];
-
 
 // FAQ Component
 const FAQ = () => {
@@ -228,13 +228,19 @@ const PriceList = () => {
                   ref={(el) => (listRef.current[index] = el)}
                   className="border-t border-b border-[#222] hover:bg-[#171717] transition-colors duration-300"
                 >
-                  <td className="py-4 px-4 text-sm text-white">{item.product}</td>
-                  <td className="py-4 px-4 text-sm text-white">{item.location}</td>
+                  <td className="py-4 px-4 text-sm text-white">
+                    {item.product}
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white">
+                    {item.location}
+                  </td>
                   <td className="py-4 px-4 text-sm text-white">
                     {index < 3 || isLoggedIn ? (
                       item.price
                     ) : (
-                      <span style={{ color: "gray" }}>---- (Login to view)</span>
+                      <span style={{ color: "gray" }}>
+                        ---- (Login to view)
+                      </span>
                     )}
                   </td>
                   <td className="py-4 px-4 text-sm text-white flex">
@@ -242,14 +248,22 @@ const PriceList = () => {
                       item.actions?.map((action, idx) => (
                         <button
                           key={idx}
-                          className={`mr-2 px-4 py-2 rounded-md font-semibold transition-colors duration-300 text-xs !cursor-pointer ${
-                            action === "Buy"
-                              ? "bg-[#005243] text-white hover:bg-[#007C60]"
-                              : "bg-[#d41818] text-white hover:bg-[#ff4d4d]"
-                          }`}
+                          className={`mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+  text-xs transition-all duration-300 ease-out 
+  shadow-lg overflow-hidden group cursor-pointer 
+  active:scale-95 hover:scale-105 
+  ${
+    action === "Buy"
+      ? "bg-gradient-to-r from-[#005243] to-[#00B3A3] shadow-[#00B3A350] hover:shadow-[#00B3A390]"
+      : "bg-gradient-to-r from-[#8B0000] to-[#d41818] shadow-[#d4181850] hover:shadow-[#ff4d4d90]"
+  }`}
                           onClick={(e) => {
                             e.stopPropagation();
-                            navigate(`/form?product=${encodeURIComponent(item.product)}`);
+                            navigate(
+                              `/form?product=${encodeURIComponent(
+                                item.product
+                              )}`
+                            );
                           }}
                         >
                           {action}
@@ -264,8 +278,11 @@ const PriceList = () => {
                             state: { from: window.location.pathname },
                           })
                         }
-                        className="inline-block border border-[#005243] text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-[#00B3A3] hover:text-black transition-colors duration-300 !cursor-pointer focus:outline-none"
-                      >
+className="inline-block text-xs font-semibold px-5 py-2 rounded-full 
+text-white bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+hover:from-[#00B3A3] hover:to-[#005243] hover:text-white 
+shadow-md hover:shadow-lg transition-all duration-300 
+cursor-pointer focus:outline-none relative overflow-hidden group"                      >
                         Login to view
                       </span>
                     )}
@@ -294,7 +311,6 @@ const PriceList = () => {
     </section>
   );
 };
-
 
 // Main Combined Section
 const AgriCommodities = () => {
@@ -335,7 +351,6 @@ const AgriCommodities = () => {
         {/* Main Content: Prices left, Form right (desktop) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
           <PriceList />
-         
         </div>
 
         {/* FAQs */}
