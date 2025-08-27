@@ -58,7 +58,7 @@ export default function Navbar() {
         {/* Logo */}
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link to="/" className="text-white font-bold text-2xl">
-            Marketplace
+            Supplix
           </Link>
         </motion.div>
 

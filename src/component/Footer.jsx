@@ -47,7 +47,7 @@ const Footer = () => {
           className="flex justify-center items-center col-span-2 lg:col-span-1"
         >
           <CircularText
-            text="MarketPlace • Explore • Connect •"
+            text="Supplix • Explore • Connect •"
             spinDuration={18}
             onHover="speedUp"
             className="text-[#00B3A3]"
@@ -101,7 +101,7 @@ const Footer = () => {
         className="relative text-center py-6 border-t border-gray-800 text-xs text-[#419c9c]"
         data-aos="fade-up"
       >
-        © {new Date().getFullYear()} Marketplace. All rights reserved.
+        © {new Date().getFullYear()} Supplix. All rights reserved.
       </div>
 
       {/* 🔹 Animations */}
