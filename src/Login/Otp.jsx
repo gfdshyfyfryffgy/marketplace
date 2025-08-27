@@ -153,15 +153,21 @@ const Otp = () => {
               <button
                 onClick={sendOTP}
                 disabled={loading}
-                className="w-full bg-[#005243] hover:bg-[#007C60] text-white py-3 rounded-md font-semibold transition-colors duration-300"
-              >
+className="w-95 inline-block text-xs font-semibold px-5 py-2 rounded-full 
+text-white bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+hover:from-[#00B3A3] hover:to-[#005243] hover:text-white 
+shadow-md hover:shadow-lg transition-all duration-300 
+cursor-pointer focus:outline-none relative overflow-hidden group"              >
                 {loading ? "Sending..." : "Send OTP"}
               </button>
             ) : (
               <button
                 onClick={verifyOTP}
-                className="w-full bg-[#005243] hover:bg-[#007C60] text-white py-3 rounded-md font-semibold transition-colors duration-300"
-              >
+className="inline-block text-xs font-semibold px-5 py-2 rounded-full 
+text-white bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+hover:from-[#00B3A3] hover:to-[#005243] hover:text-white 
+shadow-md hover:shadow-lg transition-all duration-300 
+cursor-pointer focus:outline-none relative overflow-hidden group"              >
                 Verify OTP
               </button>
             )}
