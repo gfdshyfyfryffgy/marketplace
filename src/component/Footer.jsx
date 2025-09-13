@@ -7,23 +7,43 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/f
 const footerLinks = [
   {
     title: "Company",
-    links: ["About Us", "Careers", "Blog"],
+    links: [
+      { name: "About Us", path: "/about" },
+      { name: "Careers", path: "/careers" },
+   
+    ],
   },
   {
     title: "Products",
-    links: ["Supplier Network", "Product Catalog", "Logistics", "Financing"],
+    links: [
+      { name: "Supplier Network", path: "/supplier-network" },
+      { name: "Product Catalog", path: "/products" },
+      { name: "Logistics", path: "/logistics" },
+      { name: "Financing", path: "/financing" },
+    ],
   },
   {
     title: "Support",
-    links: ["Help Center", "Contact Us", "FAQs"],
+    links: [
+      { name: "Help Center", path: "/help" },
+      { name: "Contact Us", path: "/contact" },
+      { name: "FAQs", path: "/faqs" },
+    ],
   },
   {
     title: "Legal",
-    links: ["Privacy Policy", "Terms of Service"],
+    links: [
+      { name: "Privacy Policy", path: "/privacy-policy" },
+      { name: "Terms of Service", path: "/terms" },
+    ],
   },
   {
     title: "Contact",
-    links: ["+91 96535 44472", "sochinnovative19@gmail", "Model Town, Panipat, Haryana"],
+    links: [
+      { name: "+91 96535 44472", path: "tel:+919653544472" },
+      { name: "sochinnovative19@gmail", path: "mailto:sochinnovative19@gmail.com" },
+      { name: "Model Town, Panipat, Haryana", path: "https://goo.gl/maps/z4g2" },
+    ],
   },
 ];
 
@@ -62,18 +82,18 @@ const Footer = () => {
             data-aos-delay={index * 100}
             className="break-words"
           >
-           <h4 className="text-white font-semibold mb-3 relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-0 after:h-[2px] after:bg-[#00B3A3] after:transition-all hover:after:w-full cursor-pointer">
-  {section.title}
-</h4>
+            <h4 className="text-white font-semibold mb-3 relative after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:w-0 after:h-[2px] after:bg-[#00B3A3] after:transition-all hover:after:w-full cursor-pointer">
+              {section.title}
+            </h4>
 
             <ul className="space-y-2 !cursor-pointer">
               {section.links.map((link, idx) => (
                 <li key={idx}>
                   <a
-                    href="#"
+                    href={link.path}
                     className="relative hover:text-[#00B3A3] transition duration-300 group !cursor-pointer"
                   >
-                    {link}
+                    {link.name}
                     <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-[#00B3A3] group-hover:w-full transition-all duration-300 !cursor-pointer"></span>
                   </a>
                 </li>
@@ -85,13 +105,20 @@ const Footer = () => {
 
       {/* 🔹 Social Icons */}
       <div className="relative flex justify-center gap-5 pb-8 !cursor-pointer">
-        {[FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter].map((Icon, i) => (
+        {[
+          { icon: FaFacebookF, url: "https://facebook.com" },
+          { icon: FaInstagram, url: "https://instagram.com" },
+          { icon: FaLinkedinIn, url: "https://linkedin.com" },
+          { icon: FaTwitter, url: "https://twitter.com" },
+        ].map((social, i) => (
           <a
             key={i}
-            href="#"
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-10 h-10 flex items-center justify-center rounded-full border border-[#00B3A3] text-[#00B3A3] hover:bg-[#00B3A3] hover:text-black transition-all duration-300 !cursor-pointer"
           >
-            <Icon size={16} />
+            <social.icon size={16} />
           </a>
         ))}
       </div>

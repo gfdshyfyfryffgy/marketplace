@@ -1,4 +1,4 @@
-import {React,useState} from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import map from "../assets/map.jpg"; // Correct import syntax
 import CountUp from "react-countup";
@@ -6,10 +6,8 @@ import { useInView } from "react-intersection-observer";
 import Steel from "../assets/steel.png";
 import Chemicals from "../assets/Chamical.png";
 import Bitumen from "../assets/bitumen.png";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const statsData = [
   { value: 205, suffix: "%", label: "CAGR FY22 - FY24" },
@@ -30,8 +28,6 @@ const About = () => {
     threshold: 0.8, // 80% of the component must be visible
     triggerOnce: true,
   });
-
-
 
   return (
     <section className="bg-[#000000] text-white w-full px-6 md:px-16 py-20">
@@ -55,14 +51,15 @@ const About = () => {
             the best materials at the right price.
           </p>
           <div className="flex gap-6 mt-6">
-            
             <Link to="/contact">
-              <button className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
+              <button
+                className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
              bg-gradient-to-r from-[#005243] to-[#00B3A3] 
              shadow-lg shadow-[#00B3A350] 
              transition-all duration-300 ease-out
              hover:scale-105 hover:shadow-[#00B3A390]
-             active:scale-95 overflow-hidden group !cursor-pointer">
+             active:scale-95 overflow-hidden group !cursor-pointer"
+              >
                 Contact Us
               </button>
             </Link>
@@ -135,13 +132,12 @@ const About = () => {
           <span className="text-white font-bold">30+ countries</span> with
           strategic warehouses and logistics partners.
         </p>
-        <div className="mt-6 relative w-full max-w-6xl mx-auto">
+        <div className="mt-6 relative w-full max-w-6xl mx-auto px-4">
           <img
             src={map}
             alt="World Map"
-            className="ml-15 w-[999px] h-150 rounded-xl "
+            className="w-full h-auto rounded-xl object-contain"
           />
-         
         </div>
       </div>
 
@@ -175,42 +171,47 @@ const About = () => {
 
       {/* Our Team Roles Section */}
 
-      <div className="mt-24 max-w-4xl flex flex-row items-center justify-between mx-auto">
-        <div className="mt-24 text-left space-y-4 flex flex-col items-start ml-[-150px]">
-          <h3 className="text-7xl bold font-size-20px font-bold">
-            Ready to Order ?
+      <div className="mt-24 max-w-4xl flex flex-col md:flex-row items-center justify-between mx-auto px-4">
+        {/* Left Content */}
+        <div className="text-center md:text-left space-y-4 flex flex-col items-center md:items-start md:ml-0">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold">
+            Ready to Order?
           </h3>
-          <p>
+          <p className="text-base sm:text-lg md:text-xl">
             Get in touch with us to learn more about our products and services.
           </p>
         </div>
 
-        <div className="text-center mt-16 ml-40">
-  {/* Contact Us Button - Green Teal Gradient */}
-  <Link to="/contact">
-    <button className="mt-6 mr-2 relative px-6 py-2 rounded-full text-white font-semibold 
-      bg-gradient-to-r from-[#005243] to-[#00B3A3] 
-      shadow-lg shadow-[#00B3A350] 
-      transition-all duration-300 ease-out
-      hover:scale-105 hover:shadow-[#00B3A390]
-      active:scale-95 overflow-hidden group cursor-pointer">
-      Contact Us
-    </button>
-  </Link>
+        {/* Right Content */}
+        <div className="text-center mt-8 md:mt-0 md:ml-12 flex flex-col sm:flex-row gap-4">
+          {/* Contact Us Button */}
+          <Link to="/contact">
+            <button
+              className="px-6 py-2 rounded-full text-white font-semibold 
+        bg-gradient-to-r from-[#005243] to-[#00B3A3] 
+        shadow-lg shadow-[#00B3A350] 
+        transition-all duration-300 ease-out
+        hover:scale-105 hover:shadow-[#00B3A390]
+        active:scale-95"
+            >
+              Contact Us
+            </button>
+          </Link>
 
-  {/* View Products Button - Teal to Gray Gradient */}
-  <Link to="/categories">
-    <button className="mt-6 mr-8.5 relative px-6 py-2 rounded-full text-white font-semibold 
-      bg-gradient-to-r from-[#00B3A3] to-[#C1C1C1] 
-      shadow-lg shadow-[#C1C1C140] 
-      transition-all duration-300 ease-out
-      hover:scale-105 hover:shadow-[#C1C1C180]
-      active:scale-95 overflow-hidden group cursor-pointer">
-      View Products
-    </button>
-  </Link>
-</div>
-
+          {/* View Products Button */}
+          <Link to="/categories">
+            <button
+              className="px-6 py-2 rounded-full text-white font-semibold 
+        bg-gradient-to-r from-[#00B3A3] to-[#C1C1C1] 
+        shadow-lg shadow-[#C1C1C140] 
+        transition-all duration-300 ease-out
+        hover:scale-105 hover:shadow-[#C1C1C180]
+        active:scale-95"
+            >
+              View Products
+            </button>
+          </Link>
+        </div>
       </div>
 
       {/* Statistics Section */}
@@ -234,38 +235,40 @@ const About = () => {
         </div>
       </div>
 
-      <div className="flex felx-row justify-between items-center mt-24 max-w-7xl mx-auto">
-        <div className="mt-24 relative w-full max-w-md mx-auto h-[400px]">
+      <div className="flex flex-col lg:flex-row justify-between items-center mt-24 max-w-7xl mx-auto px-4 gap-12">
+        {/* Images Section */}
+        <div className="relative w-full max-w-md h-[400px] flex-shrink-0">
           {/* Bottom image */}
           <img
             src={Steel}
             alt="Steel"
-            className="w-92 h-114 rounded-3xl absolute top-0 left-0 z-10 border-8 border-[black] shadow-lg"
+            className="w-4/5 sm:w-72 h-auto rounded-3xl absolute top-0 left-0 z-10 border-4 border-black shadow-lg"
           />
 
-          {/* Middle image (overlapping slightly) */}
+          {/* Middle image */}
           <img
             src={Chemicals}
             alt="Chemicals"
-            className="w-82 h-80 rounded-3xl absolute top-34 left-20 z-20 border-8 border-[black] shadow-lg"
+            className="w-2/3 sm:w-64 h-auto rounded-3xl absolute top-20 left-12 z-20 border-4 border-black shadow-lg"
           />
 
-          {/* Top small circular image */}
+          {/* Top circular image */}
           <img
             src={Bitumen}
             alt="Bitumen"
-            className="w-52 h-40 rounded-2xl absolute top-74 left-55 z-20 border-8 border-[black] shadow-lg"
+            className="w-1/2 sm:w-40 h-auto rounded-2xl absolute top-40 left-24 z-30 border-4 border-black shadow-lg lg:mt-12 lg:mr-12"
           />
         </div>
 
-        <div className="mt-24 max-w-4xl ml-20 space-y-6 text-left bg-black p-8 rounded-lg">
+        {/* Text Section */}
+        <div className="max-w-4xl space-y-6 text-center lg:text-left bg-black p-6 sm:p-8 rounded-lg">
           {/* Tag */}
           <span className="inline-block bg-[#005243] text-white text-sm px-4 py-1 rounded-full font-medium tracking-wide">
             ⚡ Who We Are
           </span>
 
           {/* Main Text */}
-          <p className="text-white leading-relaxed text-lg">
+          <p className="text-white leading-relaxed text-base sm:text-lg">
             As a vertically integrated player, we provide a spectrum of
             <span className="text-[#00B3A3] font-medium">
               {" "}
@@ -306,11 +309,6 @@ const About = () => {
           </p>
         </div>
       </div>
-
-    
-
-     
-  
     </section>
   );
 };

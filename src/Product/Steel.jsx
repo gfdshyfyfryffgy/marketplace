@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { useNavigate } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
-// import "./index.css";
+import "../index.css";
 // FAQ Data
 const faqData = [
   {
@@ -242,8 +242,11 @@ const PriceList = () => {
   const visibleData = showAll ? priceData : priceData.slice(0, 6);
 
   return (
-    <section className="bg-[#111] py-6 px-3 sm:px-4 md:px-6 rounded-xl shadow-lg mb-12 ">
-      <div className="max-w-6xl mx-auto w-full"> {/* ✅ Wider container for desktop */}
+    <section
+      className="bg-[#111] py-6 px-3 sm:px-4 md:px-6 rounded-xl shadow-lg mb-12 
+             w-full sm:w-[90%] md:w-[700px] lg:w-[900px] xl:w-[1200px] mx-auto"
+    >
+      <div className="max-w-6xl mx-auto w-full">
         {/* Heading */}
         <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6 text-center">
           Mild Steel Most Viewed Prices
@@ -251,17 +254,19 @@ const PriceList = () => {
 
         {/* Table Wrapper */}
         <div className="overflow-x-auto rounded-lg border border-[#222] shadow-md">
-          <table className="table-container min-w-full table-auto bg-[#191919] rounded-lg">
+          <table className="w-full table-auto bg-[#191919] rounded-lg">
             <thead className="sticky top-0 bg-[#191919] z-10">
               <tr>
-                {["Product", "Location", "Price", "Actions"].map((header, i) => (
-                  <th
-                    key={i}
-                    className="py-3 px-4 text-left text-xs sm:text-sm md:text-base font-semibold text-[#C1C1C1] whitespace-nowrap"
-                  >
-                    {header}
-                  </th>
-                ))}
+                {["Product", "Location", "Price", "Actions"].map(
+                  (header, i) => (
+                    <th
+                      key={i}
+                      className="py-3 px-4 text-left text-xs sm:text-sm md:text-base font-semibold text-[#C1C1C1] break-words"
+                    >
+                      {header}
+                    </th>
+                  )
+                )}
               </tr>
             </thead>
 
@@ -273,39 +278,47 @@ const PriceList = () => {
                   className="border-t border-b border-[#222] hover:bg-[#171717] transition-colors duration-300"
                 >
                   {/* Product */}
-                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white whitespace-nowrap">
+                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white break-words">
                     {item.product}
                   </td>
 
                   {/* Location */}
-                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white whitespace-nowrap">
+                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white break-words">
                     {item.location}
                   </td>
 
                   {/* Price */}
-                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white whitespace-nowrap">
+                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white break-words">
                     {index < 3 || isLoggedIn ? (
                       item.price
                     ) : (
-                      <span className="text-gray-500">---- (Login to view)</span>
+                      <span className="text-gray-500">
+                        ---- (Login to view)
+                      </span>
                     )}
                   </td>
 
                   {/* Actions */}
-                  <td className="py-3 px-4 flex flex-col sm:flex-row gap-2 min-w-[170px]">
+                  <td className="py-3 px-4 flex flex-col sm:flex-row gap-2 min-w-0">
                     {index < 3 || isLoggedIn ? (
                       item.actions?.map((action, idx) => (
                         <button
                           key={idx}
-                          className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-white font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 ease-out shadow-md cursor-pointer ${
-                            action === "Buy"
-                              ? "bg-gradient-to-r from-[#005243] to-[#00B3A3] hover:scale-105"
-                              : "bg-gradient-to-r from-[#8B0000] to-[#d41818] hover:scale-105"
-                          }`}
+                          className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-white font-semibold 
+      text-xs sm:text-sm md:text-base transition-all duration-300 ease-out shadow-md cursor-pointer ${
+        action === "Buy"
+          ? "bg-gradient-to-r from-[#005243] to-[#00B3A3] hover:scale-105"
+          : action === "Sell"
+          ? "bg-gradient-to-r from-[#8B0000] to-[#d41818] hover:scale-105"
+          : "bg-gray-500 cursor-not-allowed"
+      }`}
                           onClick={(e) => {
                             e.stopPropagation();
+                            // Navigate to form with product and action type
                             navigate(
-                              `/form?product=${encodeURIComponent(item.product)}`
+                              `/form?product=${encodeURIComponent(
+                                item.product
+                              )}&action=${action.toLowerCase()}`
                             );
                           }}
                         >
@@ -344,7 +357,6 @@ const PriceList = () => {
     </section>
   );
 };
-
 
 // Main Combined Section
 const Steel = () => {

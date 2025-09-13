@@ -25,6 +25,7 @@ import SolutionsFullSection from "../src/Solution/SolutionsFullSection"
 import Otp from "./Login/Otp";
 import Admin from "./Product/Admin";
 import Form from "./Product/Form"
+import Career from "./Service/Career";
 
 import MyProfile from "./Login/MyProfile";
 import AnimatedCursor from "./component/AnimatedCursor";
@@ -66,6 +67,7 @@ function App() {
          <Route path="/admin" element={<Admin />} />
          <Route path="/profile" element={<MyProfile />} />
          <Route path="/form" element={<Form />} />
+         <Route path="/careers" element={<Career />} />
 
        </Routes>
        <Footer />

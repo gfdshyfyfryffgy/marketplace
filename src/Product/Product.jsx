@@ -101,18 +101,19 @@ const Product = () => {
                     {item.title}
                   </h1>
                   <p className="text-xl text-[#C1C1C1]">{item.desc}</p>
-                  <div className="flex gap-4">
-                    <Link to={item.link}>
-                      <button className="w-[180px] h-full bg-[#005243] hover:bg-[#006b5a] text-white rounded-2xl font-semibold transition">
-                        Buy
-                      </button>
-                    </Link>
-                    <Link to={item.link}>
-                      <button className="w-[180px] h-full bg-[#00B3A3] hover:bg-[#009c93] text-white rounded-2xl font-semibold transition">
-                        Sell
-                      </button>
-                    </Link>
-                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 w-full">
+  <Link to={item.link} className="w-full sm:w-[180px]">
+    <button className="w-full h-full bg-[#005243] hover:bg-[#006b5a] text-white rounded-2xl font-semibold transition py-3">
+      Buy
+    </button>
+  </Link>
+  <Link to={item.link} className="w-full sm:w-[180px]">
+    <button className="w-full h-full bg-[#00B3A3] hover:bg-[#009c93] text-white rounded-2xl font-semibold transition py-3">
+      Sell
+    </button>
+  </Link>
+</div>
+
                 </div>
               </div>
             </SwiperSlide>
