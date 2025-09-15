@@ -196,28 +196,31 @@ const PriceList = () => {
   const visibleData = showAll ? priceData : priceData.slice(0, 6);
 
   return (
-    <section className="bg-[#111] py-10 px-6 rounded-xl shadow-lg mb-12 w-320">
-      <div className="max-w-2xl mx-auto w-full">
-        <h2 className="text-2xl font-bold text-white mb-8 text-center ">
-          Mild Steel Most Viewed Prices
+    <section
+      className="bg-[#111] py-6 px-3 sm:px-4 md:px-6 rounded-xl shadow-lg mb-12 
+             w-full sm:w-[90%] md:w-[700px] lg:w-[900px] xl:w-[1200px] mx-auto"
+    >
+      <div className="max-w-6xl mx-auto w-full">
+        {/* Heading */}
+        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6 text-center">
+         AgriCommodities Most Viewed Prices
         </h2>
 
-        <div className="overflow-x-auto w-300 ml-[-260px] ">
-          <table className="w-full table-auto bg-[#191919] rounded-lg shadow">
-            <thead>
+        {/* Table Wrapper */}
+        <div className="overflow-x-auto rounded-lg border border-[#222] shadow-md">
+          <table className="w-full table-auto bg-[#191919] rounded-lg">
+            <thead className="sticky top-0 bg-[#191919] z-10">
               <tr>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Product
-                </th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Location
-                </th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Price
-                </th>
-                <th className="py-3 px-4 text-left text-xs font-semibold text-[#C1C1C1]">
-                  Actions
-                </th>
+                {["Product", "Location", "Price", "Actions"].map(
+                  (header, i) => (
+                    <th
+                      key={i}
+                      className="py-3 px-4 text-left text-xs sm:text-sm md:text-base font-semibold text-[#C1C1C1] break-words"
+                    >
+                      {header}
+                    </th>
+                  )
+                )}
               </tr>
             </thead>
 
@@ -228,41 +231,48 @@ const PriceList = () => {
                   ref={(el) => (listRef.current[index] = el)}
                   className="border-t border-b border-[#222] hover:bg-[#171717] transition-colors duration-300"
                 >
-                  <td className="py-4 px-4 text-sm text-white">
+                  {/* Product */}
+                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white break-words">
                     {item.product}
                   </td>
-                  <td className="py-4 px-4 text-sm text-white">
+
+                  {/* Location */}
+                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white break-words">
                     {item.location}
                   </td>
-                  <td className="py-4 px-4 text-sm text-white">
+
+                  {/* Price */}
+                  <td className="py-3 px-4 text-xs sm:text-sm md:text-base text-white break-words">
                     {index < 3 || isLoggedIn ? (
                       item.price
                     ) : (
-                      <span style={{ color: "gray" }}>
+                      <span className="text-gray-500">
                         ---- (Login to view)
                       </span>
                     )}
                   </td>
-                  <td className="py-4 px-4 text-sm text-white flex">
+
+                  {/* Actions */}
+                  <td className="py-3 px-4 flex flex-col sm:flex-row gap-2 min-w-0">
                     {index < 3 || isLoggedIn ? (
                       item.actions?.map((action, idx) => (
                         <button
                           key={idx}
-                          className={`mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
-  text-xs transition-all duration-300 ease-out 
-  shadow-lg overflow-hidden group cursor-pointer 
-  active:scale-95 hover:scale-105 
-  ${
-    action === "Buy"
-      ? "bg-gradient-to-r from-[#005243] to-[#00B3A3] shadow-[#00B3A350] hover:shadow-[#00B3A390]"
-      : "bg-gradient-to-r from-[#8B0000] to-[#d41818] shadow-[#d4181850] hover:shadow-[#ff4d4d90]"
-  }`}
+                          className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-white font-semibold 
+      text-xs sm:text-sm md:text-base transition-all duration-300 ease-out shadow-md cursor-pointer ${
+        action === "Buy"
+          ? "bg-gradient-to-r from-[#005243] to-[#00B3A3] hover:scale-105"
+          : action === "Sell"
+          ? "bg-gradient-to-r from-[#8B0000] to-[#d41818] hover:scale-105"
+          : "bg-gray-500 cursor-not-allowed"
+      }`}
                           onClick={(e) => {
                             e.stopPropagation();
+                            // Navigate to form with product and action type
                             navigate(
                               `/form?product=${encodeURIComponent(
                                 item.product
-                              )}`
+                              )}&action=${action.toLowerCase()}`
                             );
                           }}
                         >
@@ -270,21 +280,16 @@ const PriceList = () => {
                         </button>
                       ))
                     ) : (
-                      <span
-                        role="button"
-                        tabIndex={0}
+                      <button
                         onClick={() =>
                           navigate("/login", {
                             state: { from: window.location.pathname },
                           })
                         }
-className="inline-block text-xs font-semibold px-5 py-2 rounded-full 
-text-white bg-gradient-to-r from-[#005243] to-[#00B3A3] 
-hover:from-[#00B3A3] hover:to-[#005243] hover:text-white 
-shadow-md hover:shadow-lg transition-all duration-300 
-cursor-pointer focus:outline-none relative overflow-hidden group"                      >
+                        className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-white text-xs sm:text-sm md:text-base font-semibold bg-gradient-to-r from-[#005243] to-[#00B3A3] hover:scale-105 transition-all duration-300"
+                      >
                         Login to view
-                      </span>
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -296,12 +301,7 @@ cursor-pointer focus:outline-none relative overflow-hidden group"               
         {/* Toggle View All / View Less */}
         <div className="text-center">
           <button
-            className="mt-6 relative px-6 py-2 rounded-full text-white font-semibold 
-              bg-gradient-to-r from-[#005243] to-[#00B3A3] 
-              shadow-lg shadow-[#00B3A350] 
-              transition-all duration-300 ease-out
-              hover:scale-105 hover:shadow-[#00B3A390]
-              active:scale-95 overflow-hidden group cursor-pointer"
+            className="mt-6 px-5 py-2 rounded-full text-white font-semibold text-sm sm:text-base md:text-lg bg-gradient-to-r from-[#005243] to-[#00B3A3] shadow-lg hover:scale-105 transition-all duration-300"
             onClick={() => setShowAll((prev) => !prev)}
           >
             {showAll ? "View Less" : "View All Prices"}
@@ -311,6 +311,7 @@ cursor-pointer focus:outline-none relative overflow-hidden group"               
     </section>
   );
 };
+
 
 // Main Combined Section
 const AgriCommodities = () => {
