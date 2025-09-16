@@ -17,7 +17,7 @@ const footerLinks = [
     title: "Products",
     links: [
       { name: "Supplier Network", path: "/supplier-network" },
-      { name: "Product Catalog", path: "/products" },
+      { name: "Product Catalog", path: "/categories" },
       { name: "Logistics", path: "/logistics" },
       { name: "Financing", path: "/financing" },
     ],
@@ -25,7 +25,7 @@ const footerLinks = [
   {
     title: "Support",
     links: [
-      { name: "Help Center", path: "/help" },
+      { name: "Help Center", path: "/contact" },
       { name: "Contact Us", path: "/contact" },
       { name: "FAQs", path: "/faqs" },
     ],

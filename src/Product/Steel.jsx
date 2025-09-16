@@ -3,6 +3,10 @@ import { gsap } from "gsap";
 import { useNavigate } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
 import "../index.css";
+// import { useProducts } from "../context/ProductsContext";
+
+
+//  const { data } = useProducts();
 // FAQ Data
 const faqData = [
   {

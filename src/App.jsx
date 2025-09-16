@@ -23,12 +23,18 @@ import About from "../src/About/About";
 import Service from "../src/Service/Service"
 import SolutionsFullSection from "../src/Solution/SolutionsFullSection"
 import Otp from "./Login/Otp";
-import Admin from "./Product/Admin";
+
 import Form from "./Product/Form"
 import Career from "./Service/Career";
 
 import MyProfile from "./Login/MyProfile";
 import AnimatedCursor from "./component/AnimatedCursor";
+import Admin from "./admin/Admin";
+import PrivacyPolicy from "./Service/PrivacyPolicy";
+import TermsAndConditions from "./Service/TermCondition";
+import SupplierNetwork from "./Service/SupplierNetwork";
+import Logistics from "./Service/Logistics";
+import Finance from "./Service/Finance";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -68,6 +74,12 @@ function App() {
          <Route path="/profile" element={<MyProfile />} />
          <Route path="/form" element={<Form />} />
          <Route path="/careers" element={<Career />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/supplier-network" element={<SupplierNetwork />} />
+          <Route path="/logistics" element={<Logistics />} />
+          <Route path="/financing" element={<Finance />} />
 
        </Routes>
        <Footer />
